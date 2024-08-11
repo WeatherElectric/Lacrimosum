@@ -5,6 +5,7 @@ using BepInEx.Logging;
 using CSync.Extensions;
 using CSync.Lib;
 using Lacrimosum.Assets;
+using Utilities = Lacrimosum.Helpers.Utilities;
 
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 
@@ -73,6 +74,9 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         WilloWispSpawnWeight =
             configFile.BindSyncedEntry(ScrapSection, "WilloWispSpawnWeight", 10,
                 "Explode enemies on death, except you're the enemy");
+        GoatHoofSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "GoatHoofSpawnWeight", 10,
+                "Increase movement speed.");
         
         DiosBestFriendPrice =
             configFile.BindSyncedEntry(ShopSection, "DiosBestFriendPrice", 1000,
@@ -83,6 +87,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     
     [field: SyncedEntryField] public SyncedEntry<int> BisonSteakSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> WilloWispSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> GoatHoofSpawnWeight { get; set; }
     
     [field: SyncedEntryField] public SyncedEntry<int> DiosBestFriendPrice { get; set; }
 }

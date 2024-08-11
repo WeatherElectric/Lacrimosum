@@ -1,23 +1,7 @@
-using System.Linq;
-
 namespace Lacrimosum.Helpers;
 
 public static class Utilities
 {
-    public static List<PlayerControllerB> allPlayerScripts = [];
-
-    internal static void Init()
-    {
-        On.StartOfRound.Start += OnStartOfRound;
-        RoR2Plugin.ModConsole.LogDebug("StartOfRound.Start hooked!");
-    }
-
-    private static void OnStartOfRound(On.StartOfRound.orig_Start orig, StartOfRound self)
-    {
-        orig(self);
-        allPlayerScripts = self.allPlayerScripts.ToList();
-    }
-        
     public static int RoundToInt(this float value)
     {
         return (int)System.Math.Round(value);
@@ -28,127 +12,28 @@ public static class Utilities
         WalkieTalkie.TransmitOneShotAudio(audioSource, noiseSfx);
         RoundManager.Instance.PlayAudibleNoise(sourceLocation, noiseRange, noiseLoudness, 0, isInElevator && StartOfRound.Instance.hangarDoorsClosed);
     }
-
-    public static T LoadPersistentAsset<T>(this AssetBundle bundle, string assetPath) where T : Object
-    {
-        Object asset = bundle.LoadAsset<T>(assetPath);
-        
-        if (asset == null)
-        {
-            RoR2Plugin.ModConsole.LogError($"Failed to load asset at path {assetPath}!");
-            return null;
-        }
-
-        asset.hideFlags = HideFlags.DontUnloadUnusedAsset;
-        return (T)asset;
-    }
-
-    public static T[] LoadAllPersistentAssets<T>(this AssetBundle bundle) where T : Object
-    {
-        var assets = bundle.LoadAllAssets<T>();
-        
-        foreach (var asset in assets)
-        {
-            asset.hideFlags = HideFlags.DontUnloadUnusedAsset;
-        }
-
-        if (assets.Length != 0) return assets;
-        RoR2Plugin.ModConsole.LogError("Failed to load any assets!");
-        return null;
-
-    }
     
     public static int GetPlayerIndex(this PlayerControllerB player)
     {
-        return allPlayerScripts.IndexOf(player);
+	    var allPlayers = StartOfRound.Instance.allPlayerScripts;
+	    var playerName = player.playerUsername;
+	    for (var i = 0; i < allPlayers.Length; i++)
+	    {
+		    Debug.Log("Player: " + allPlayers[i]);
+		    if (allPlayers[i] != null && allPlayers[i].playerUsername == playerName)
+		    {
+			    return i;
+		    }
+	    }
+
+	    return -1;
     }
 
-    public static void Revive(this PlayerControllerB player)
+    public static Vector3 GetSpawnPosition(this PlayerControllerB player)
     {
-        
-        StartOfRound.Instance.allPlayersDead = false;
-        player.ResetPlayerBloodObjects(player.isPlayerDead);
-        if (!player.isPlayerDead && !player.isPlayerControlled) return;
-        player.isClimbingLadder = false;
-        player.clampLooking = false;
-        player.inVehicleAnimation = false;
-        player.disableMoveInput = false;
-        player.ResetZAndXRotation();
-        player.thisController.enabled = true;
-        player.health = 100;
-        player.disableLookInput = false;
-        player.disableInteract = false;
-        player.isPlayerDead = false;
-        player.isPlayerControlled = true;
-        player.isInElevator = true;
-        player.isInHangarShipRoom = true;
-        player.isInsideFactory = false;
-        player.parentedToElevatorLastFrame = false;
-        player.overrideGameOverSpectatePivot = null;
-        StartOfRound.Instance.SetPlayerObjectExtrapolate(enable: false);
-        player.TeleportPlayer(StartOfRound.Instance.GetPlayerSpawnPosition(player.GetPlayerIndex()));
-        player.setPositionOfDeadPlayer = false;
-        player.DisablePlayerModel(player.gameObject, true, true);
-        player.helmetLight.enabled = false;
-        player.Crouch(false);
-        player.criticallyInjured = false;
-        player.playerBodyAnimator.SetBool("Limp", false);
-        player.bleedingHeavily = false;
-        player.activatingItem = false;
-        player.twoHanded = false;
-        player.inShockingMinigame = false;
-        player.inSpecialInteractAnimation = false;
-        player.freeRotationInInteractAnimation = false;
-        player.disableSyncInAnimation = false;
-        player.inAnimationWithEnemy = null;
-        player.holdingWalkieTalkie = false;
-        player.speakingToWalkieTalkie = false;
-        player.isSinking = false;
-        player.isUnderwater = false;
-        player.sinkingValue = 0f;
-        player.statusEffectAudio.Stop();
-        player.DisableJetpackControlsLocally();
-        player.mapRadarDotAnimator.SetBool("dead", false);
-        player.externalForceAutoFade = Vector3.zero;
-        if (player.IsOwner)
-        {
-            HUDManager.Instance.gasHelmetAnimator.SetBool("gasEmitting", false);
-            player.hasBegunSpectating = false;
-            HUDManager.Instance.RemoveSpectateUI();
-            HUDManager.Instance.gameOverAnimator.SetTrigger("revive");
-            player.hinderedMultiplier = 1f;
-            player.isMovementHindered = 0;
-            player.sourcesCausingSinking = 0;
-            player.reverbPreset = StartOfRound.Instance.shipReverb;
-        }
-        SoundManager.Instance.earsRingingTimer = 0f;
-        player.voiceMuffledByEnemy = false;
-        if (player.currentVoiceChatIngameSettings != null)
-        {
-            if (player.currentVoiceChatIngameSettings.voiceAudio == null)
-            {
-                player.currentVoiceChatIngameSettings.InitializeComponents();
-            }
-            if (player.currentVoiceChatIngameSettings.voiceAudio == null)
-            {
-                return;
-            }
-            player.currentVoiceChatIngameSettings.voiceAudio.GetComponent<OccludeAudio>().overridingLowPass = false;
-        }
-        HUDManager.Instance.UpdateHealthUI(100, hurtPlayer: false);
-        player.spectatedPlayerScript = null;
-        HUDManager.Instance.audioListenerLowPass.enabled = false;
-        StartOfRound.Instance.SetSpectateCameraToGameOverMode(enableGameOver: false, player);
-        var ragdolls = Object.FindObjectsOfType<RagdollGrabbableObject>();
-        foreach (var ragdoll in ragdolls)
-        {
-            if (!StartOfRound.Instance.IsServer || ragdoll.ragdoll.playerScript != player) continue;
-            if (ragdoll.NetworkObject.IsSpawned) ragdoll.NetworkObject.Despawn();
-            else Object.Destroy(ragdoll.gameObject);
-        }
-        StartOfRound.Instance.livingPlayers += 1;
-        StartOfRound.Instance.shipAnimator.ResetTrigger("ShipLeave");
+	    return StartOfRound.Instance.GetPlayerSpawnPosition(player.GetPlayerIndex());
     }
+    
     
     public static void CreateExplosion(Vector3 explosionPosition, bool spawnExplosionEffect = false, int damage = 20,
         float minDamageRange = 0f, float maxDamageRange = 1f, int enemyHitForce = 6,

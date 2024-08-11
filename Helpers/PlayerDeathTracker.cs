@@ -15,7 +15,9 @@ internal static class PlayerDeathTracker
     private static void OnPlayerDeathEarly(On.GameNetcodeStuff.PlayerControllerB.orig_KillPlayer orig, PlayerControllerB self, Vector3 bodyVelocity, bool spawnBody, CauseOfDeath causeOfDeath, int deathAnimation, Vector3 positionOffset)
     {
         orig(self, bodyVelocity, spawnBody, causeOfDeath, deathAnimation, positionOffset);
-        HandleDiosBestFriend(self);
+        
+        
+        RoR2Plugin.ModConsole.LogDebug("Player death early!");
     }
 
     private static void OnPlayerLateDeath(On.GameNetcodeStuff.PlayerControllerB.orig_SpawnDeadBody orig, PlayerControllerB self, int playerId, Vector3 bodyVelocity, int causeOfDeath, PlayerControllerB deadPlayerController, int deathAnimation, Transform overridePosition, Vector3 positionOffset)
@@ -23,6 +25,8 @@ internal static class PlayerDeathTracker
         orig(self, playerId, bodyVelocity, causeOfDeath, deadPlayerController, deathAnimation, overridePosition, positionOffset);
 
         HandleWillOWisp(self);
+        HandleDiosBestFriend(self);
+        RoR2Plugin.ModConsole.LogDebug("Player late death!");
     }
 
     private static void HandleWillOWisp(PlayerControllerB player)

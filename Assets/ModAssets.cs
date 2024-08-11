@@ -34,6 +34,10 @@ internal static class ModAssets
         var willoWisp = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/WilloWisp.asset");
         NetworkPrefabs.RegisterNetworkPrefab(willoWisp.spawnPrefab);
         Items.RegisterScrap(willoWisp, RoR2Plugin.Config.WilloWispSpawnWeight, Levels.LevelTypes.All);
+        
+        var goatHoof = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/PaulsGoatHoof.asset");
+        NetworkPrefabs.RegisterNetworkPrefab(goatHoof.spawnPrefab);
+        Items.RegisterScrap(goatHoof, RoR2Plugin.Config.GoatHoofSpawnWeight, Levels.LevelTypes.All);
     }
 
     private static void LoadShopItems()
