@@ -44,6 +44,7 @@ internal class RoR2Plugin : BaseUnityPlugin
 
         ModAssets.Load();
         PlayerEventTracker.Init();
+        WeaponEventTracker.Init();
         BungusHelper.Init();
     }
 
