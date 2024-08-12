@@ -5,7 +5,6 @@ using BepInEx.Logging;
 using CSync.Extensions;
 using CSync.Lib;
 using Lacrimosum.Assets;
-using Utilities = Lacrimosum.Helpers.Utilities;
 
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 
@@ -72,11 +71,23 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
             configFile.BindSyncedEntry(ScrapSection, "BisonSteakSpawnWeight", 10,
                 "The most useless item other than the shitass old war stealth kit!");
         WilloWispSpawnWeight =
-            configFile.BindSyncedEntry(ScrapSection, "WilloWispSpawnWeight", 10,
+            configFile.BindSyncedEntry(ScrapSection, "WilloWispSpawnWeight", 20,
                 "Explode enemies on death, except you're the enemy");
         GoatHoofSpawnWeight =
-            configFile.BindSyncedEntry(ScrapSection, "GoatHoofSpawnWeight", 10,
+            configFile.BindSyncedEntry(ScrapSection, "GoatHoofSpawnWeight", 20,
                 "Increase movement speed.");
+        WhiteScrapSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "WhiteScrapSpawnWeight", 40,
+                "Does nothing.");
+        GreenScrapSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "GreenScrapSpawnWeight", 30,
+                "Does nothing.");
+        YellowScrapSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "YellowScrapSpawnWeight", 20,
+                "Does nothing.");
+        RedScrapSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "RedScrapSpawnWeight", 10,
+                "Does nothing.");
         
         DiosBestFriendPrice =
             configFile.BindSyncedEntry(ShopSection, "DiosBestFriendPrice", 1000,
@@ -88,6 +99,10 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     [field: SyncedEntryField] public SyncedEntry<int> BisonSteakSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> WilloWispSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> GoatHoofSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> WhiteScrapSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> GreenScrapSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> RedScrapSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> YellowScrapSpawnWeight { get; set; }
     
     [field: SyncedEntryField] public SyncedEntry<int> DiosBestFriendPrice { get; set; }
 }
