@@ -72,6 +72,10 @@ internal static class ModAssets
         var rollOfPennies = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/RollOfPennies.asset");
         NetworkPrefabs.RegisterNetworkPrefab(rollOfPennies.spawnPrefab);
         Items.RegisterScrap(rollOfPennies, RoR2Plugin.Config.RollOfPenniesSpawnWeight, Levels.LevelTypes.All);
+        
+        var ukulele = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/Ukulele.asset");
+        NetworkPrefabs.RegisterNetworkPrefab(ukulele.spawnPrefab);
+        Items.RegisterScrap(ukulele, RoR2Plugin.Config.UkuleleSpawnWeight, Levels.LevelTypes.All);
     }
 
     private static void LoadShopItems()
