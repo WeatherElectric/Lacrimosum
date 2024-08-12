@@ -6,7 +6,7 @@ internal static class WeaponEventTracker
 {
     public static void Init()
     {
-        On.Shovel.HitShovel += OnShovelHit;    
+        On.Shovel.HitShovel += OnShovelHit;
     }
     
     private static void OnShovelHit(On.Shovel.orig_HitShovel orig, Shovel self, bool cancel)

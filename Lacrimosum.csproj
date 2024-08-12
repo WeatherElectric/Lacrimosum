@@ -38,6 +38,7 @@
       <None Remove="BuildComplete.bat" />
       <None Remove="LICENSE" />
       <None Remove="README.md" />
+      <None Remove="global.json" />
     </ItemGroup>
 
     <ItemGroup>
