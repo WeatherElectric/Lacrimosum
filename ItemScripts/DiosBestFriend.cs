@@ -32,27 +32,7 @@ public class DiosBestFriend : ItemBehaviour
     [ClientRpc]
     public void ReviveClientRpc()
     {
-        Revive(playerToRevive);
-        RoR2Plugin.ModConsole.LogDebug($"Revived {playerToRevive.playerUsername}");
-        StartCoroutine(Despawn());
-    }
-
-    private IEnumerator Despawn()
-    {
-        playerHeldBy.DropAllHeldItems();
-        yield return new WaitForSeconds(1f);
-        NetworkObject.Despawn();
-    }
-
-    public override void DiscardItem()
-    {
-        base.DiscardItem();
-        if (!lastPlayerHeldBy.isPlayerDead) ActiveExtraLives.Remove(this);
-        if (!lastPlayerHeldBy.isPlayerDead) targetPlayer = null;
-    }
-
-    private void Revive(PlayerControllerB player)
-    {
+        var player = playerToRevive;
         var playerIndex = player.GetPlayerIndex();
         player.ResetPlayerBloodObjects(player.isPlayerDead);
         player.isClimbingLadder = false;
@@ -149,5 +129,21 @@ public class DiosBestFriend : ItemBehaviour
         StartOfRound.Instance.livingPlayers++;
         StartOfRound.Instance.allPlayersDead = false;
         StartOfRound.Instance.UpdatePlayerVoiceEffects();
+        RoR2Plugin.ModConsole.LogDebug($"Revived {playerToRevive.playerUsername}");
+        StartCoroutine(Despawn());
+    }
+
+    private IEnumerator Despawn()
+    {
+        playerHeldBy.DropAllHeldItems();
+        yield return new WaitForSeconds(1f);
+        NetworkObject.Despawn();
+    }
+
+    public override void DiscardItem()
+    {
+        base.DiscardItem();
+        if (!lastPlayerHeldBy.isPlayerDead) ActiveExtraLives.Remove(this);
+        if (!lastPlayerHeldBy.isPlayerDead) targetPlayer = null;
     }
 }

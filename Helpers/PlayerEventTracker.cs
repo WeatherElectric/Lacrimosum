@@ -32,10 +32,21 @@ internal static class PlayerEventTracker
     // ReSharper disable Unity.PerformanceAnalysis
     private static IEnumerator HandleDiosBestFriend(PlayerControllerB player)
     {
-        yield return new WaitForSeconds(10f);
-        foreach (var extraLife in DiosBestFriend.ActiveExtraLives)
+        // if the last player dies, the ship leaves before the 15 second timer is up, so just respawn instantly despite the UI issue, UI issue will be fixed upon leaving anyways
+        if (StartOfRound.Instance.livingPlayers == 1)
         {
-            extraLife.CheckPlayerDeath(player);
+            foreach (var extraLife in DiosBestFriend.ActiveExtraLives)
+            {
+                extraLife.CheckPlayerDeath(player);
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(15f);
+            foreach (var extraLife in DiosBestFriend.ActiveExtraLives)
+            {
+                extraLife.CheckPlayerDeath(player);
+            }
         }
     }
 
