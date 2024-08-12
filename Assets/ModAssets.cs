@@ -7,6 +7,8 @@ namespace Lacrimosum.Assets;
 internal static class ModAssets
 {
     private static AssetBundle _bundle;
+    
+    public static GameObject BungusMushroomWardPrefab;
 
     public static void Load()
     {
@@ -14,6 +16,7 @@ internal static class ModAssets
         
         LoadScrapItems();
         LoadShopItems();
+        LoadStrayAssets();
     }
 
     private static bool LoadBundle(string bundleName)
@@ -23,6 +26,12 @@ internal static class ModAssets
         if (_bundle != null) return true;
         RoR2Plugin.ModConsole.LogError("Failed to load asset bundle: " + bundleName);
         return false;
+    }
+
+    private static void LoadStrayAssets()
+    {
+        BungusMushroomWardPrefab = _bundle.LoadAsset<GameObject>("Assets/Lacrimosum/Scrap/BungusAssets/MushroomWard.prefab");
+        BungusMushroomWardPrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
 
     private static void LoadScrapItems()
@@ -54,6 +63,11 @@ internal static class ModAssets
         var yellowScrap = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/YellowScrap.asset");
         NetworkPrefabs.RegisterNetworkPrefab(yellowScrap.spawnPrefab);
         Items.RegisterScrap(yellowScrap, RoR2Plugin.Config.YellowScrapSpawnWeight, Levels.LevelTypes.All);
+        
+        var bungus = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/Bungus.asset");
+        if (RoR2Plugin.Config.BungusMode) bungus.itemName = "Bungus";
+        NetworkPrefabs.RegisterNetworkPrefab(bungus.spawnPrefab);
+        Items.RegisterScrap(bungus, RoR2Plugin.Config.BungusSpawnWeight, Levels.LevelTypes.All);
     }
 
     private static void LoadShopItems()

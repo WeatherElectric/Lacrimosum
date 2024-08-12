@@ -13,6 +13,11 @@ public static class Utilities
         RoundManager.Instance.PlayAudibleNoise(sourceLocation, noiseRange, noiseLoudness, 0, isInElevator && StartOfRound.Instance.hangarDoorsClosed);
     }
     
+    public static GameObject GetMushroomWard(this PlayerControllerB player)
+    {
+        return player.transform.Find("MushroomWard").gameObject;
+    }
+    
     public static int GetPlayerIndex(this PlayerControllerB player)
     {
 	    var allPlayers = StartOfRound.Instance.allPlayerScripts;

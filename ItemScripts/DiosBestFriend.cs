@@ -69,7 +69,7 @@ public class DiosBestFriend : ItemBehaviour
             player.isInsideFactory = false;
             player.parentedToElevatorLastFrame = false;
             StartOfRound.Instance.SetPlayerObjectExtrapolate(false);
-            player.TeleportPlayer(player.GetSpawnPosition());
+            if (RoR2Plugin.Config.DiosBestFriendRespawnAtShip) player.TeleportPlayer(player.GetSpawnPosition());
             player.setPositionOfDeadPlayer = false;
             player.DisablePlayerModel(StartOfRound.Instance.allPlayerObjects[playerIndex], true, true);
             player.helmetLight.enabled = false;

@@ -7,6 +7,11 @@ public class BisonSteak : ItemBehaviour
     [Header("Bison Steak Settings")]
     [Tooltip("The amount of health to add when held.")]
     public int addedHealth = 25;
+
+    public override void OnNetworkSpawn()
+    {
+        addedHealth = RoR2Plugin.Config.BisonSteakHealthIncrease;
+    }
     
     public override void GrabItem()
     {

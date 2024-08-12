@@ -8,6 +8,11 @@ public class GoatHoof : ItemBehaviour
     [Tooltip("The amount of speed to add when held.")]
     public float addedSpeedPercent = 4.6f;
     
+    public override void OnNetworkSpawn()
+    {
+        addedSpeedPercent = RoR2Plugin.Config.GoatHoofSpeedIncrease;
+    }
+    
     public override void GrabItem()
     {
         base.GrabItem();
