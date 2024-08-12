@@ -21,6 +21,7 @@ public class Bungus : ItemBehaviour
     
     public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         addedHealth = RoR2Plugin.Config.BungusHealthIncrease;
         healInterval = RoR2Plugin.Config.BungusHealInterval;
         activationTime = RoR2Plugin.Config.BungusActivationTime;

@@ -43,7 +43,7 @@ internal class RoR2Plugin : BaseUnityPlugin
         NetcodePatcher();
 
         ModAssets.Load();
-        PlayerDeathTracker.Init();
+        PlayerEventTracker.Init();
         BungusHelper.Init();
     }
 
@@ -111,8 +111,12 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         BungusMode =
             configFile.BindSyncedEntry(ScrapSection, "BungusMode", false,
                 "Rename the item to Bungus. If false, it's called Bustling Fungus.");
-        
-        
+        RollOfPenniesSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesSpawnWeight", 40,
+                "Increases item value upon taking damage.");
+        RollOfPenniesValueIncrease =
+            configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesValueIncrease", 10,
+                "How much to increase item value by.");
         
         DiosBestFriendPrice =
             configFile.BindSyncedEntry(ShopSection, "DiosBestFriendPrice", 1000,
@@ -138,6 +142,8 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     [field: SyncedEntryField] public SyncedEntry<float> BungusHealInterval { get; set; }
     [field: SyncedEntryField] public SyncedEntry<float> BungusActivationTime { get; set; }
     [field: SyncedEntryField] public SyncedEntry<bool> BungusMode { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesValueIncrease { get; set; }
     
     [field: SyncedEntryField] public SyncedEntry<int> DiosBestFriendPrice { get; set; }
     [field: SyncedEntryField] public SyncedEntry<bool> DiosBestFriendRespawnAtShip { get; set; }

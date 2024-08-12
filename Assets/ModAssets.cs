@@ -68,6 +68,10 @@ internal static class ModAssets
         if (RoR2Plugin.Config.BungusMode) bungus.itemName = "Bungus";
         NetworkPrefabs.RegisterNetworkPrefab(bungus.spawnPrefab);
         Items.RegisterScrap(bungus, RoR2Plugin.Config.BungusSpawnWeight, Levels.LevelTypes.All);
+        
+        var rollOfPennies = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/RollOfPennies.asset");
+        NetworkPrefabs.RegisterNetworkPrefab(rollOfPennies.spawnPrefab);
+        Items.RegisterScrap(rollOfPennies, RoR2Plugin.Config.RollOfPenniesSpawnWeight, Levels.LevelTypes.All);
     }
 
     private static void LoadShopItems()
