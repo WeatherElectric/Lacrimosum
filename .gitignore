@@ -2,5 +2,6 @@
 bin/
 obj/
 Staging/
-LowIntelligenceSpecimens.sln.DotSettings.user
 NetcodePatcher/
+MMHook/
+Lacrimosum.sln.DotSettings.user

@@ -39,24 +39,15 @@
       <None Remove="LICENSE" />
       <None Remove="README.md" />
       <None Remove="global.json" />
+      <None Remove="MMHook\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Reference Include="MMHOOK_Assembly-CSharp">
-          <HintPath>C:\Users\Mabel\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\blueass idiot\BepInEx\plugins\MMHOOK\MMHOOK_Assembly-CSharp.dll</HintPath>
+        <HintPath>MMHook\MMHOOK_Assembly-CSharp.dll</HintPath>
           <Publicize>true</Publicize>
           <Private>false</Private>
       </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Staging\**" />
-      <Compile Remove="NetcodePatcher\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="Staging\**" />
-      <EmbeddedResource Remove="NetcodePatcher\**" />
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">

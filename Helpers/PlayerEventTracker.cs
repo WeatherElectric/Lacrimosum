@@ -35,6 +35,7 @@ internal static class PlayerEventTracker
         // if the last player dies, the ship leaves before the 15 second timer is up, so just respawn instantly despite the UI issue, UI issue will be fixed upon leaving anyways
         if (StartOfRound.Instance.livingPlayers == 1)
         {
+            yield return new WaitForSeconds(2f);
             foreach (var extraLife in DiosBestFriend.ActiveExtraLives)
             {
                 extraLife.CheckPlayerDeath(player);

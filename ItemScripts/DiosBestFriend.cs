@@ -32,6 +32,12 @@ public class DiosBestFriend : ItemBehaviour
     [ClientRpc]
     public void ReviveClientRpc()
     {
+        RevivePlayer();
+        StartCoroutine(Despawn());
+    }
+
+    private void RevivePlayer()
+    {
         var player = playerToRevive;
         var playerIndex = player.GetPlayerIndex();
         player.ResetPlayerBloodObjects(player.isPlayerDead);
@@ -130,7 +136,6 @@ public class DiosBestFriend : ItemBehaviour
         StartOfRound.Instance.allPlayersDead = false;
         StartOfRound.Instance.UpdatePlayerVoiceEffects();
         RoR2Plugin.ModConsole.LogDebug($"Revived {playerToRevive.playerUsername}");
-        StartCoroutine(Despawn());
     }
 
     private IEnumerator Despawn()
