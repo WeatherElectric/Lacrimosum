@@ -38,6 +38,9 @@ public class DiosBestFriend : ItemBehaviour
 
     private void TeleportPlayer()
     {
+        playerHeldBy.isFallingNoJump = false;
+        playerHeldBy.isFallingFromJump = false;
+        playerHeldBy.fallValue = 0;
         playerHeldBy.isInElevator = true;
         playerHeldBy.isInHangarShipRoom = true;
         playerHeldBy.isInsideFactory = false;
