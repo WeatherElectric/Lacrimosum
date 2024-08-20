@@ -9,11 +9,13 @@ public class GooboJr : ThrowableItemBehaviour
     public Material gooboJrMaterial;
     
     private GameObject _maskedEnemyPrefab;
+    private EnemyType _enemyType;
     
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         _maskedEnemyPrefab = NetworkPrefabList.NetworkPrefabs.Find(prefab => prefab.name == "MaskedPlayerEnemy");
+        _enemyType = _maskedEnemyPrefab.GetComponent<EnemyAI>().enemyType;
         RoR2Plugin.ModConsole.LogDebug($"Found MaskedPlayerEnemy prefab: {_maskedEnemyPrefab}");
     }
 
@@ -34,14 +36,7 @@ public class GooboJr : ThrowableItemBehaviour
     [ClientRpc]
     private void SpawnMaskedEnemyClientRpc()
     {
-        var masked = Instantiate(_maskedEnemyPrefab);
-        masked.transform.position = transform.position;
-        _maskedEnemyPrefab.GetComponent<NetworkObject>().Spawn();
-        var renderers = masked.GetComponentsInChildren<SkinnedMeshRenderer>();
-        foreach (var renderer in renderers)
-        {
-            renderer.material = gooboJrMaterial;
-        }
+        RoundManager.Instance.SpawnEnemyGameObject(transform.position, transform.rotation.y, 0, _enemyType);
         NetworkObject.Despawn();
     }
 }

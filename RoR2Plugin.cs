@@ -46,6 +46,7 @@ internal class RoR2Plugin : BaseUnityPlugin
         PlayerEventTracker.Init();
         WeaponEventTracker.Init();
         BungusHelper.Init();
+        NetworkPrefabList.Init();
     }
 
     private static void NetcodePatcher()
@@ -121,6 +122,9 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         UkuleleSpawnWeight =
             configFile.BindSyncedEntry(ScrapSection, "UkuleleSpawnWeight", 30,
                 "...and his music was electric.");
+        GooboJrSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "GooboJrSpawnWeight", 7,
+                "Spawn a gummy clone of yourself. May not be friendly.");
         
         DiosBestFriendPrice =
             configFile.BindSyncedEntry(ShopSection, "DiosBestFriendPrice", 1000,
@@ -149,6 +153,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesValueIncrease { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> UkuleleSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> GooboJrSpawnWeight { get; set; }
     
     [field: SyncedEntryField] public SyncedEntry<int> DiosBestFriendPrice { get; set; }
     [field: SyncedEntryField] public SyncedEntry<bool> DiosBestFriendRespawnAtShip { get; set; }
