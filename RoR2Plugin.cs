@@ -123,7 +123,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
             configFile.BindSyncedEntry(ScrapSection, "UkuleleSpawnWeight", 30,
                 "...and his music was electric.");
         GooboJrSpawnWeight =
-            configFile.BindSyncedEntry(ScrapSection, "GooboJrSpawnWeight", 7,
+            configFile.BindSyncedEntry(ScrapSection, "GooboJrSpawnWeight", 10,
                 "Spawn a gummy clone of yourself. May not be friendly.");
         
         DiosBestFriendPrice =

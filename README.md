@@ -142,7 +142,7 @@ Risk of Rain 2-based items.
 > GooboJrSpawnWeight
 > > The chance of Goobo Jr. spawning in the world.
 > 
-> > Default: 7
+> > Default: 10
 
 > DiosBestFriendPrice
 > > The price of Dio's Best Friend.

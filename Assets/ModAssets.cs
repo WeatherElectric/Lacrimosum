@@ -34,6 +34,14 @@ internal static class ModAssets
         BungusMushroomWardPrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
 
+    private const Levels.LevelTypes GooboSpawnMaps = Levels.LevelTypes.RendLevel | Levels.LevelTypes.TitanLevel |
+                                                     Levels.LevelTypes.ArtificeLevel | Levels.LevelTypes.DineLevel |
+                                                     Levels.LevelTypes.AssuranceLevel | Levels.LevelTypes.Modded;
+
+    private const Levels.LevelTypes BungusSpawnMaps = Levels.LevelTypes.Modded | Levels.LevelTypes.AdamanceLevel |
+                                                      Levels.LevelTypes.MarchLevel | Levels.LevelTypes.VowLevel |
+                                                      Levels.LevelTypes.DineLevel | Levels.LevelTypes.RendLevel;
+    
     private static void LoadScrapItems()
     {
         var bisonSteak = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/BisonSteak.asset");
@@ -67,7 +75,7 @@ internal static class ModAssets
         var bungus = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/Bungus.asset");
         if (RoR2Plugin.Config.BungusMode) bungus.itemName = "Bungus";
         NetworkPrefabs.RegisterNetworkPrefab(bungus.spawnPrefab);
-        Items.RegisterScrap(bungus, RoR2Plugin.Config.BungusSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(bungus, RoR2Plugin.Config.BungusSpawnWeight, BungusSpawnMaps);
         
         var rollOfPennies = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/RollOfPennies.asset");
         NetworkPrefabs.RegisterNetworkPrefab(rollOfPennies.spawnPrefab);
@@ -79,7 +87,7 @@ internal static class ModAssets
         
         var goobojr = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/GooboJr.asset");
         NetworkPrefabs.RegisterNetworkPrefab(goobojr.spawnPrefab);
-        Items.RegisterScrap(goobojr, RoR2Plugin.Config.GooboJrSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(goobojr, RoR2Plugin.Config.GooboJrSpawnWeight, GooboSpawnMaps);
     }
 
     private static void LoadShopItems()
