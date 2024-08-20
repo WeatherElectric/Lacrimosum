@@ -7,16 +7,19 @@ Risk of Rain 2-based items.
 
 > Bustling Fungus - White Item - Scrap Item
 > > While standing still, heal for 10 health per second.
+> >
 > > ![Bungus](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/bungus.gif)
 
 > Paul's Goat Hoof - White Item - Scrap Item
 > > Increase the player's movement speed while held.
+> >
 > > ![Goat Hoof](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/goathoof.gif)
 
 > Goobo Jr. - Orange Item - Scrap Item
 > > Once thrown, summon a gummy clone of yourself. It might not be friendly.
 > >
 > > Training's hard, okay?
+> >
 > > ![Goobo Jr.](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/goobojr.gif)
 
 > Roll Of Pennies - White Item - Scrap Item
@@ -26,6 +29,7 @@ Risk of Rain 2-based items.
 > > ...and his music was electric.
 > >
 > > Similar to a stop sign.
+> >
 > > ![Ukulele](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/ukulele.gif)
 
 > Will O' The Wisp - Green Item - Scrap Item
@@ -45,6 +49,7 @@ Risk of Rain 2-based items.
 
 > Dio's Best Friend - Red Item - Shop Item
 > > Cheat death. Teleport back to the ship before dying.
+> >
 > > ![Dio's Best Friend](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/diosbestfriend.gif)
 
 
