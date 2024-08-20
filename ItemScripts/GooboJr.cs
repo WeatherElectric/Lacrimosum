@@ -22,7 +22,7 @@ public class GooboJr : ThrowableItemBehaviour
     public override void PlayDropSFX()
     {
         base.PlayDropSFX();
-        if (!wasThrown) return;
+        if (!WasThrown) return;
         if (StartOfRound.Instance.currentLevel.PlanetName == "71 Gordion") return;
         SpawnMaskedEnemyServerRpc();
     }
@@ -37,6 +37,17 @@ public class GooboJr : ThrowableItemBehaviour
     private void SpawnMaskedEnemyClientRpc()
     {
         RoundManager.Instance.SpawnEnemyGameObject(transform.position, transform.rotation.y, 0, _enemyType);
+        var maskedEnemies = FindObjectsOfType<MaskedPlayerEnemy>();
+        foreach (var enemy in maskedEnemies)
+        {
+            var distance = Vector3.Distance(enemy.transform.position, transform.position);
+            if (distance > 5f) continue;
+            var skinnedMeshRenderers = enemy.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (var skinnedMeshRenderer in skinnedMeshRenderers)
+            {
+                skinnedMeshRenderer.material = gooboJrMaterial;
+            }
+        }
         NetworkObject.Despawn();
     }
 }

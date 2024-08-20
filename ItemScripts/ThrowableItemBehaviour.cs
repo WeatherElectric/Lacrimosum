@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Lacrimosum.ItemScripts;
+﻿namespace Lacrimosum.ItemScripts;
 
 [AddComponentMenu("Lacrimosum/Throwable Item Behaviour")]
 public class ThrowableItemBehaviour : ItemBehaviour
@@ -10,8 +8,7 @@ public class ThrowableItemBehaviour : ItemBehaviour
     public AnimationCurve itemFallCurve;
     public AnimationCurve itemVerticalFallCurveNoBounce;
 
-    [NonSerialized] 
-    public bool wasThrown;
+    protected bool WasThrown;
     
     private RaycastHit _itemHit;
     private Ray _itemThrowRay;
@@ -22,7 +19,7 @@ public class ThrowableItemBehaviour : ItemBehaviour
         base.ItemActivate(used, buttonDown);
         if (!IsOwner) return;
         playerHeldBy.DiscardHeldObject(placeObject: true, null, GetGrenadeThrowDestination());
-        wasThrown = true;
+        WasThrown = true;
     }
     
     public override void FallWithCurve()
@@ -77,6 +74,6 @@ public class ThrowableItemBehaviour : ItemBehaviour
     public override void GrabItem()
     {
         base.GrabItem();
-        wasThrown = false;
+        WasThrown = false;
     }
 }

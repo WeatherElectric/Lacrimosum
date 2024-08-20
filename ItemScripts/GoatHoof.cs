@@ -46,6 +46,6 @@ public class GoatHoof : ItemBehaviour
     [ClientRpc]
     private void RemoveSpeedClientRpc()
     {
-        lastPlayerHeldBy.movementSpeed -= addedSpeedPercent;
+        LastPlayerHeldBy.movementSpeed -= addedSpeedPercent;
     }
 }

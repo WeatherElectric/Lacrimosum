@@ -47,6 +47,6 @@ public class BisonSteak : ItemBehaviour
     [ClientRpc]
     private void RemoveHealthClientRpc()
     {
-        lastPlayerHeldBy.health -= addedHealth;
+        LastPlayerHeldBy.health -= addedHealth;
     }
 }
