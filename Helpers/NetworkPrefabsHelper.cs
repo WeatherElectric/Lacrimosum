@@ -1,8 +1,10 @@
 ﻿namespace Lacrimosum.Helpers;
 
-internal static class NetworkPrefabList
+internal static class NetworkPrefabsHelper
 {
     public static readonly List<GameObject> NetworkPrefabs = [];
+
+    public static EnemyType MaskedEnemy;
     
     public static void Init()
     {
@@ -17,5 +19,13 @@ internal static class NetworkPrefabList
         {
             NetworkPrefabs.Add(prefab.Prefab);
         }
+        
+        FindRequiredPrefabs();
+    }
+
+    private static void FindRequiredPrefabs()
+    {
+        var maskedEnemyPrefab = NetworkPrefabs.Find(prefab => prefab.name == "MaskedPlayerEnemy");
+        MaskedEnemy = maskedEnemyPrefab.GetComponent<EnemyAI>().enemyType;
     }
 }

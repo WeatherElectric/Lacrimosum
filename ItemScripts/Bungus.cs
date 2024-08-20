@@ -22,10 +22,10 @@ public class Bungus : ItemBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        addedHealth = RoR2Plugin.Config.BungusHealthIncrease;
-        healInterval = RoR2Plugin.Config.BungusHealInterval;
-        activationTime = RoR2Plugin.Config.BungusActivationTime;
-        if (RoR2Plugin.Config.BungusMode) ScanNodeProperties.headerText = "Bungus";
+        addedHealth = RoR2Plugin.ModConfig.BungusHealthIncrease;
+        healInterval = RoR2Plugin.ModConfig.BungusHealInterval;
+        activationTime = RoR2Plugin.ModConfig.BungusActivationTime;
+        if (RoR2Plugin.ModConfig.BungusMode) ScanNodeProperties.headerText = "Bungus";
     }
     
     public override void GrabItem()
@@ -81,7 +81,7 @@ public class Bungus : ItemBehaviour
         while (_isHealing)
         {
             // ReSharper disable once Unity.PreferNonAllocApi
-            var playersInZone = Physics.OverlapSphere(transform.position, 6f, LayerMask.GetMask("Player"));
+            var playersInZone = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Player"));
             foreach (var player in playersInZone)
             {
                 if (!player.TryGetComponent(out PlayerControllerB playerController)) continue;
@@ -105,14 +105,16 @@ internal static class BungusHelper
     public static void Init()
     {
         On.GameNetcodeStuff.PlayerControllerB.Start += OnPlayerStart;
-        RoR2Plugin.ModConsole.LogDebug("PlayerControllerB.Start hooked!");
+        RoR2Plugin.ModConsole.LogDebug("BungusHelper: PlayerControllerB.Start hooked!");
     }
 
     private static void OnPlayerStart(On.GameNetcodeStuff.PlayerControllerB.orig_Start orig, PlayerControllerB self)
     {
+        RoR2Plugin.ModConsole.LogDebug($"Player {self.playerUsername} started!");
         orig(self);
         var bungusWard = Object.Instantiate(ModAssets.BungusMushroomWardPrefab, self.transform);
         bungusWard.name = "MushroomWard";
         bungusWard.SetActive(false);
+        RoR2Plugin.ModConsole.LogDebug($"Set up BungusWard for {self.playerUsername}!");
     }
 }

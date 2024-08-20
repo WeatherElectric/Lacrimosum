@@ -27,26 +27,33 @@ internal class RoR2Plugin : BaseUnityPlugin
     internal static readonly string AssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
     internal static ManualLogSource ModConsole;
-    internal new static LacrimosumConfig Config;
+    internal static LacrimosumConfig ModConfig;
 
     private void Awake()
     {
         ModConsole = Logger;
-
-        ModConsole.LogInfo($"Plugin {PluginGuid} is loaded!");
+        
+        ModConsole.LogInfo($"Loading {PluginGuid}...");
 #if DEBUG
-        ModConsole.LogWarning("This is a debug build! Expect shit to be dumber than normal!");
+        ModConsole.LogWarning("This is a debug build! Expect problems!");
 #endif
 
-        Config = new LacrimosumConfig(base.Config);
+        ModConfig = new LacrimosumConfig(Config);
+        ModConsole.LogInfo($"Config loaded for {PluginGuid}");
 
         NetcodePatcher();
+        ModConsole.LogInfo($"Netcode patched for {PluginGuid}");
 
         ModAssets.Load();
+        ModConsole.LogInfo($"Assets loaded for {PluginGuid}");
         PlayerEventTracker.Init();
+        ModConsole.LogInfo("PlayerEventTracker loaded");
         WeaponEventTracker.Init();
+        ModConsole.LogInfo("WeaponEventTracker loaded");
         BungusHelper.Init();
-        NetworkPrefabList.Init();
+        ModConsole.LogInfo("BungusHelper loaded");
+        NetworkPrefabsHelper.Init();
+        ModConsole.LogInfo("NetworkPrefabsHelper loaded");
     }
 
     private static void NetcodePatcher()
@@ -119,6 +126,9 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         RollOfPenniesValueIncrease =
             configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesValueIncrease", 10,
                 "How much to increase item value by.");
+        RollOfPenniesMaxValue =
+            configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesMaxValue", 100,
+                "The maximum value the item can reach.");
         UkuleleSpawnWeight =
             configFile.BindSyncedEntry(ScrapSection, "UkuleleSpawnWeight", 30,
                 "...and his music was electric.");
@@ -149,6 +159,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     [field: SyncedEntryField] public SyncedEntry<bool> BungusMode { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesValueIncrease { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesMaxValue { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> UkuleleSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> GooboJrSpawnWeight { get; set; }
     

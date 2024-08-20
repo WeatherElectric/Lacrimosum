@@ -7,17 +7,6 @@ public class GooboJr : ThrowableItemBehaviour
     [Header("Goobo Jr. Settings")]
     [Tooltip("The material to apply to the masked enemy.")]
     public Material gooboJrMaterial;
-    
-    private GameObject _maskedEnemyPrefab;
-    private EnemyType _enemyType;
-    
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-        _maskedEnemyPrefab = NetworkPrefabList.NetworkPrefabs.Find(prefab => prefab.name == "MaskedPlayerEnemy");
-        _enemyType = _maskedEnemyPrefab.GetComponent<EnemyAI>().enemyType;
-        RoR2Plugin.ModConsole.LogDebug($"Found MaskedPlayerEnemy prefab: {_maskedEnemyPrefab}");
-    }
 
     public override void PlayDropSFX()
     {
@@ -36,12 +25,12 @@ public class GooboJr : ThrowableItemBehaviour
     [ClientRpc]
     private void SpawnMaskedEnemyClientRpc()
     {
-        RoundManager.Instance.SpawnEnemyGameObject(transform.position, transform.rotation.y, 0, _enemyType);
+        RoundManager.Instance.SpawnEnemyGameObject(transform.position, transform.rotation.y, 0, NetworkPrefabsHelper.MaskedEnemy);
         var maskedEnemies = FindObjectsOfType<MaskedPlayerEnemy>();
         foreach (var enemy in maskedEnemies)
         {
             var distance = Vector3.Distance(enemy.transform.position, transform.position);
-            if (distance > 5f) continue;
+            if (distance > 2f) continue;
             var skinnedMeshRenderers = enemy.GetComponentsInChildren<SkinnedMeshRenderer>();
             foreach (var skinnedMeshRenderer in skinnedMeshRenderers)
             {

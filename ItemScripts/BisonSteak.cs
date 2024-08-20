@@ -11,7 +11,7 @@ public class BisonSteak : ItemBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        addedHealth = RoR2Plugin.Config.BisonSteakHealthIncrease;
+        addedHealth = RoR2Plugin.ModConfig.BisonSteakHealthIncrease;
     }
     
     public override void GrabItem()

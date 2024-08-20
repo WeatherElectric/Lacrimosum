@@ -17,26 +17,28 @@ public static class Utilities
     {
         return player.transform.Find("MushroomWard").gameObject;
     }
-    
-    public static int GetPlayerIndex(this PlayerControllerB player)
-    {
-	    var allPlayers = StartOfRound.Instance.allPlayerScripts;
-	    var playerName = player.playerUsername;
-	    for (var i = 0; i < allPlayers.Length; i++)
-	    {
-		    Debug.Log("Player: " + allPlayers[i]);
-		    if (allPlayers[i] != null && allPlayers[i].playerUsername == playerName)
-		    {
-			    return i;
-		    }
-	    }
 
-	    return -1;
-    }
+    
 
     public static Vector3 GetSpawnPosition(this PlayerControllerB player)
     {
 	    return StartOfRound.Instance.GetPlayerSpawnPosition(player.GetPlayerIndex());
+    }
+
+    public static int GetPlayerIndex(this PlayerControllerB player)
+    {
+        var allPlayers = StartOfRound.Instance.allPlayerScripts;
+        var playerName = player.playerUsername;
+        for (var i = 0; i < allPlayers.Length; i++)
+        {
+            Debug.Log("Player: " + allPlayers[i]);
+            if (allPlayers[i] != null && allPlayers[i].playerUsername == playerName)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
     
     

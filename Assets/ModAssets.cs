@@ -46,48 +46,48 @@ internal static class ModAssets
     {
         var bisonSteak = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/BisonSteak.asset");
         NetworkPrefabs.RegisterNetworkPrefab(bisonSteak.spawnPrefab);
-        Items.RegisterScrap(bisonSteak, RoR2Plugin.Config.BisonSteakSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(bisonSteak, RoR2Plugin.ModConfig.BisonSteakSpawnWeight, Levels.LevelTypes.All);
         
         var willoWisp = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/WilloWisp.asset");
         NetworkPrefabs.RegisterNetworkPrefab(willoWisp.spawnPrefab);
-        Items.RegisterScrap(willoWisp, RoR2Plugin.Config.WilloWispSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(willoWisp, RoR2Plugin.ModConfig.WilloWispSpawnWeight, Levels.LevelTypes.All);
         
         var goatHoof = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/PaulsGoatHoof.asset");
         NetworkPrefabs.RegisterNetworkPrefab(goatHoof.spawnPrefab);
-        Items.RegisterScrap(goatHoof, RoR2Plugin.Config.GoatHoofSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(goatHoof, RoR2Plugin.ModConfig.GoatHoofSpawnWeight, Levels.LevelTypes.All);
         
         var whiteScrap = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/WhiteScrap.asset");
         NetworkPrefabs.RegisterNetworkPrefab(whiteScrap.spawnPrefab);
-        Items.RegisterScrap(whiteScrap, RoR2Plugin.Config.WhiteScrapSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(whiteScrap, RoR2Plugin.ModConfig.WhiteScrapSpawnWeight, Levels.LevelTypes.All);
         
         var greenScrap = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/GreenScrap.asset");
         NetworkPrefabs.RegisterNetworkPrefab(greenScrap.spawnPrefab);
-        Items.RegisterScrap(greenScrap, RoR2Plugin.Config.GreenScrapSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(greenScrap, RoR2Plugin.ModConfig.GreenScrapSpawnWeight, Levels.LevelTypes.All);
         
         var redScrap = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/RedScrap.asset");
         NetworkPrefabs.RegisterNetworkPrefab(redScrap.spawnPrefab);
-        Items.RegisterScrap(redScrap, RoR2Plugin.Config.RedScrapSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(redScrap, RoR2Plugin.ModConfig.RedScrapSpawnWeight, Levels.LevelTypes.All);
         
         var yellowScrap = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/YellowScrap.asset");
         NetworkPrefabs.RegisterNetworkPrefab(yellowScrap.spawnPrefab);
-        Items.RegisterScrap(yellowScrap, RoR2Plugin.Config.YellowScrapSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(yellowScrap, RoR2Plugin.ModConfig.YellowScrapSpawnWeight, Levels.LevelTypes.All);
         
         var bungus = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/Bungus.asset");
-        if (RoR2Plugin.Config.BungusMode) bungus.itemName = "Bungus";
+        if (RoR2Plugin.ModConfig.BungusMode) bungus.itemName = "Bungus";
         NetworkPrefabs.RegisterNetworkPrefab(bungus.spawnPrefab);
-        Items.RegisterScrap(bungus, RoR2Plugin.Config.BungusSpawnWeight, BungusSpawnMaps);
+        Items.RegisterScrap(bungus, RoR2Plugin.ModConfig.BungusSpawnWeight, BungusSpawnMaps);
         
         var rollOfPennies = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/RollOfPennies.asset");
         NetworkPrefabs.RegisterNetworkPrefab(rollOfPennies.spawnPrefab);
-        Items.RegisterScrap(rollOfPennies, RoR2Plugin.Config.RollOfPenniesSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(rollOfPennies, RoR2Plugin.ModConfig.RollOfPenniesSpawnWeight, Levels.LevelTypes.All);
         
         var ukulele = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/Ukulele.asset");
         NetworkPrefabs.RegisterNetworkPrefab(ukulele.spawnPrefab);
-        Items.RegisterScrap(ukulele, RoR2Plugin.Config.UkuleleSpawnWeight, Levels.LevelTypes.All);
+        Items.RegisterScrap(ukulele, RoR2Plugin.ModConfig.UkuleleSpawnWeight, Levels.LevelTypes.All);
         
         var goobojr = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/GooboJr.asset");
         NetworkPrefabs.RegisterNetworkPrefab(goobojr.spawnPrefab);
-        Items.RegisterScrap(goobojr, RoR2Plugin.Config.GooboJrSpawnWeight, GooboSpawnMaps);
+        Items.RegisterScrap(goobojr, RoR2Plugin.ModConfig.GooboJrSpawnWeight, GooboSpawnMaps);
     }
 
     private static void LoadShopItems()
@@ -95,6 +95,6 @@ internal static class ModAssets
         var diosBestFriend = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Shop/DiosBestFriend.asset");
         var diosBestFriendNode = _bundle.LoadAsset<TerminalNode>("Assets/Lacrimosum/Shop/DiosBestFriendNode.asset");
         NetworkPrefabs.RegisterNetworkPrefab(diosBestFriend.spawnPrefab);
-        Items.RegisterShopItem(diosBestFriend, null!, null!, diosBestFriendNode, RoR2Plugin.Config.DiosBestFriendPrice);
+        Items.RegisterShopItem(diosBestFriend, null!, null!, diosBestFriendNode, RoR2Plugin.ModConfig.DiosBestFriendPrice);
     }
 }

@@ -9,11 +9,14 @@ public class RollOfPennies : ItemBehaviour
     [Header("Roll Of Pennies Settings")]
     [Tooltip("The amount of credits to add to the item's value upon taking damage.")]
     public int addedCredits = 10;
+    [Tooltip("The cap for the item's value.")]
+    public int maxCredits = 100;
     
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        addedCredits = RoR2Plugin.Config.RollOfPenniesValueIncrease;
+        addedCredits = RoR2Plugin.ModConfig.RollOfPenniesValueIncrease;
+        maxCredits = RoR2Plugin.ModConfig.RollOfPenniesMaxValue;
     }
     
     public override void GrabItem()
@@ -25,6 +28,7 @@ public class RollOfPennies : ItemBehaviour
     public void CheckDamagedPlayer(PlayerControllerB player)
     {
         if (player != playerHeldBy) return;
+        if (scrapValue >= maxCredits) return;
         AddCreditsServerRpc();
     }
     

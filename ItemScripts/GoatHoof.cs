@@ -10,7 +10,7 @@ public class GoatHoof : ItemBehaviour
     
     public override void OnNetworkSpawn()
     {
-        addedSpeedPercent = RoR2Plugin.Config.GoatHoofSpeedIncrease;
+        addedSpeedPercent = RoR2Plugin.ModConfig.GoatHoofSpeedIncrease;
     }
     
     public override void GrabItem()

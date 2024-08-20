@@ -5,58 +5,53 @@ namespace Lacrimosum.ItemScripts;
 public class DiosBestFriend : ItemBehaviour
 {
     public static readonly List<DiosBestFriend> ActiveExtraLives = [];
-    public PlayerControllerB targetPlayer;
-    public PlayerControllerB playerToRevive;
 
     public override void GrabItem()
     {
         base.GrabItem();
-        targetPlayer = playerHeldBy;
         ActiveExtraLives.Add(this);
     }
 
     public bool CheckPlayerDeath(PlayerControllerB player)
     {
-        return player == targetPlayer;
+        return player == playerHeldBy;
     }
     
-    public void TeleportPlayer(PlayerControllerB player)
+    public void PreventPlayerDeath(PlayerControllerB player)
     {
-        playerToRevive = player;
-        ReviveServerRpc();
+        if (player != playerHeldBy) return; // just in case
+        TeleportServerRpc();
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void ReviveServerRpc()
+    public void TeleportServerRpc()
     {
-        ReviveClientRpc();
+        TeleportClientRpc();
     }
 
     [ClientRpc]
-    public void ReviveClientRpc()
+    public void TeleportClientRpc()
     {
-        RevivePlayer();
+        TeleportPlayer();
         StartCoroutine(Despawn());
     }
 
-    private void RevivePlayer()
+    private void TeleportPlayer()
     {
-        var player = playerToRevive;
-        player.isInElevator = true;
-        player.isInHangarShipRoom = true;
-        player.isInsideFactory = false;
-        player.parentedToElevatorLastFrame = false;
-        StartOfRound.Instance.SetPlayerObjectExtrapolate(false);
-        player.TeleportPlayer(player.GetSpawnPosition());
-        player.criticallyInjured = false;
-        if (player.playerBodyAnimator != null) player.playerBodyAnimator.SetBool("Limp", false);
-        player.bleedingHeavily = false;
-        player.health = 100;
+        playerHeldBy.isInElevator = true;
+        playerHeldBy.isInHangarShipRoom = true;
+        playerHeldBy.isInsideFactory = false;
+        playerHeldBy.parentedToElevatorLastFrame = false;
+        playerHeldBy.TeleportPlayer(playerHeldBy.GetSpawnPosition());
+        playerHeldBy.criticallyInjured = false;
+        if (playerHeldBy.playerBodyAnimator != null) playerHeldBy.playerBodyAnimator.SetBool("Limp", false);
+        playerHeldBy.bleedingHeavily = false;
+        playerHeldBy.health = 100;
     }
 
     private IEnumerator Despawn()
     {
-        playerHeldBy.DropAllHeldItems();
+        playerHeldBy.DropAllHeldItemsAndSync();
         yield return new WaitForSeconds(1f);
         NetworkObject.Despawn();
     }
@@ -65,6 +60,5 @@ public class DiosBestFriend : ItemBehaviour
     {
         base.DiscardItem();
         if (!LastPlayerHeldBy.isPlayerDead) ActiveExtraLives.Remove(this);
-        if (!LastPlayerHeldBy.isPlayerDead) targetPlayer = null;
     }
 }
