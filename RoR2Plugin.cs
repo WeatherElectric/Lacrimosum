@@ -129,10 +129,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         DiosBestFriendPrice =
             configFile.BindSyncedEntry(ShopSection, "DiosBestFriendPrice", 1000,
                 "Cheat death. Consumed on use.");
-        DiosBestFriendRespawnAtShip =
-            configFile.BindSyncedEntry(ShopSection, "DiosBestFriendRespawnAtShip", true,
-                "Respawn at the ship when used. Otherwise, respawn where you died. If disabled and you die to a pit or mud or water, you will stay there and just die again. Recommended to leave true unless you're too good and never die to those.");
-
+        
         ConfigManager.Register(this);
     }
     
@@ -156,5 +153,4 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     [field: SyncedEntryField] public SyncedEntry<int> GooboJrSpawnWeight { get; set; }
     
     [field: SyncedEntryField] public SyncedEntry<int> DiosBestFriendPrice { get; set; }
-    [field: SyncedEntryField] public SyncedEntry<bool> DiosBestFriendRespawnAtShip { get; set; }
 }

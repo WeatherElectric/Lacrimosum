@@ -47,7 +47,7 @@ public class DiosBestFriend : ItemBehaviour
         player.isInsideFactory = false;
         player.parentedToElevatorLastFrame = false;
         StartOfRound.Instance.SetPlayerObjectExtrapolate(false);
-        if (RoR2Plugin.Config.DiosBestFriendRespawnAtShip) player.TeleportPlayer(player.GetSpawnPosition());
+        player.TeleportPlayer(player.GetSpawnPosition());
         player.criticallyInjured = false;
         if (player.playerBodyAnimator != null) player.playerBodyAnimator.SetBool("Limp", false);
         player.bleedingHeavily = false;
