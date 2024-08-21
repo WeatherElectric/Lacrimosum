@@ -3,6 +3,12 @@ Risk of Rain 2-based items.
 
 ---
 
+## Supported Game Versions
+### v62 - Tested And Confirmed With Released Build
+### v55 - Tested And Confirmed With Released Build
+
+---
+
 ## Items
 ### Bustling Fungus - White Item - Scrap Item
 >While standing still, heal for 10 health per second.
@@ -67,3 +73,4 @@ Risk of Rain 2-based items.
 
 ## Credits
 * All models and textures belong to Hopoo Games.
+* Icon drawn by my friend Majestoony!!
