@@ -19,7 +19,6 @@ internal static class MenuMusicReplacer
         if (RoR2Plugin.ModConfig.AlwaysReplaceMenuMusic.Value)
         {
             ReplaceMenuMusic(self);
-            AddLilGuy(self);
             ChangeMenuColors(self);
         }
         else
@@ -28,10 +27,11 @@ internal static class MenuMusicReplacer
             if (random < 2)
             {
                 ReplaceMenuMusic(self);
-                AddLilGuy(self);
                 ChangeMenuColors(self);
             }
         }
+        
+        AddLilGuy(self);
         
         orig(self);
     }
@@ -69,8 +69,8 @@ internal static class MenuMusicReplacer
         var mainButtons = menuContainer.transform.Find("MainButtons").gameObject;
         var lilGuyObj = Object.Instantiate(ModAssets.LilGuyPrefab, mainButtons.transform);
         var lilGuyRect = lilGuyObj.GetComponent<RectTransform>();
-        lilGuyRect.localPosition = new Vector3(248.52f, 149.7f, 0);
-        lilGuyRect.anchoredPosition = new Vector2(248.52f, -149.7f);
-        lilGuyRect.sizeDelta = new Vector2(75, -149.7f);
+        lilGuyRect.localPosition = new Vector3(207.6f, 106.5756f, 0);
+        lilGuyRect.anchoredPosition = new Vector2(207.6f, -130.3f);
+        lilGuyRect.sizeDelta = new Vector2(130, -130.3f);
     }
 }
