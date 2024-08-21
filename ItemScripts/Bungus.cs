@@ -85,7 +85,14 @@ public class Bungus : ItemBehaviour
             foreach (var player in playersInZone)
             {
                 if (!player.TryGetComponent(out PlayerControllerB playerController)) continue;
-                if (playerController.health != 100) playerController.health += addedHealth;
+                if (playerController.health != 100)
+                {
+                    playerController.health += addedHealth;
+                    if (playerController.health > 100) playerController.health = 100;
+                    playerHeldBy.criticallyInjured = false;
+                    if (playerHeldBy.playerBodyAnimator) playerHeldBy.playerBodyAnimator.SetBool("Limp", false);
+                    playerHeldBy.bleedingHeavily = false;
+                }
                 yield return new WaitForSeconds(healInterval);
             }
         }
@@ -97,24 +104,5 @@ public class Bungus : ItemBehaviour
         if (_isHealing) StopHealServerRpc();
         _mushroomWard.SetActive(false);
         _mushroomWard = null;
-    }
-}
-
-internal static class BungusHelper
-{
-    public static void Init()
-    {
-        On.GameNetcodeStuff.PlayerControllerB.Start += OnPlayerStart;
-        RoR2Plugin.ModConsole.LogDebug("BungusHelper: PlayerControllerB.Start hooked!");
-    }
-
-    private static void OnPlayerStart(On.GameNetcodeStuff.PlayerControllerB.orig_Start orig, PlayerControllerB self)
-    {
-        RoR2Plugin.ModConsole.LogDebug($"Player {self.playerUsername} started!");
-        orig(self);
-        var bungusWard = Object.Instantiate(ModAssets.BungusMushroomWardPrefab, self.transform);
-        bungusWard.name = "MushroomWard";
-        bungusWard.SetActive(false);
-        RoR2Plugin.ModConsole.LogDebug($"Set up BungusWard for {self.playerUsername}!");
     }
 }

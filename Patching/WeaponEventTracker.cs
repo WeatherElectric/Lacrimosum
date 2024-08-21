@@ -1,6 +1,6 @@
 ﻿using Lacrimosum.ItemScripts;
 
-namespace Lacrimosum.Helpers;
+namespace Lacrimosum.Patching;
 
 internal static class WeaponEventTracker
 {

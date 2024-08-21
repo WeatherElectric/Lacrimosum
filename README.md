@@ -1,154 +1,69 @@
 # Lacrimosum
 Risk of Rain 2-based items.
 
+---
+
 ## Items
-> Bison Steak - White Item - Scrap Item
-> > Increase the player's health by 25 while held.
+### Bustling Fungus - White Item - Scrap Item
+>While standing still, heal for 10 health per second.
 
-> Bustling Fungus - White Item - Scrap Item
-> > While standing still, heal for 10 health per second.
-> >
-> > ![Bungus](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/bungus.gif)
+![Bungus](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/bungus.gif)
 
-> Paul's Goat Hoof - White Item - Scrap Item
-> > Increase the player's movement speed while held.
-> >
-> > ![Goat Hoof](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/goathoof.gif)
+---
 
-> Goobo Jr. - Orange Item - Scrap Item
-> > Once thrown, summon a gummy clone of yourself. It might not be friendly.
-> >
-> > Training's hard, okay?
-> >
-> > ![Goobo Jr.](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/goobojr.gif)
+### Paul's Goat Hoof - White Item - Scrap Item
+> Increase the player's movement speed while held.
 
-> Roll Of Pennies - White Item - Scrap Item
-> > Starts worthless, but the more damage you take, the higher its value gets.
+![Goat Hoof](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/goathoof.gif)
 
-> Ukulele - Green Item - Scrap Item
-> > ...and his music was electric.
-> >
-> > Similar to a stop sign.
-> >
-> > ![Ukulele](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/ukulele.gif)
+---
 
-> Will O' The Wisp - Green Item - Scrap Item
-> > Explode on death while held.
+### Goobo Jr. - Orange Item - Scrap Item
+> Once thrown, summon a gummy clone of yourself. It might not be friendly.
+> 
+> Training's hard, okay?
 
-> White Scrap - White Item - Scrap Item
-> > A scrap of white rarity.
-> 
-> Green Scrap - Green Item - Scrap Item
-> > A scrap of green rarity.
-> 
-> Yellow Scrap - Yellow Item - Scrap Item
-> > A scrap of yellow rarity.
-> 
-> Red Scrap - Red Item - Scrap Item
-> > A scrap of red rarity.
+![Goobo Jr.](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/goobojr.gif)
 
-> Dio's Best Friend - Red Item - Shop Item
-> > Cheat death. Teleport back to the ship before dying.
-> >
-> > ![Dio's Best Friend](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/diosbestfriend.gif)
+---
 
+### Roll Of Pennies - White Item - Scrap Item
+> Starts worthless, but the more damage you take, the higher its value gets.
 
-## Configuration
-> BisonSteakSpawnWeight
-> > The chance of the Bison Steak spawning in the world.
-> 
-> > Default: 10
-> 
-> BisonSteakHealthIncrease
-> > The amount of health the Bison Steak gives.
-> 
-> > Default: 25
+---
 
-> WilloWispSpawnWeight
-> > The chance of the Will O' The Wisp spawning in the world.
+### Ukulele - Green Item - Scrap Item
+>  ...and his music was electric.
 > 
-> > Default: 20
+> Similar to a stop sign.
 
-> GoatHoofSpawnWeight
-> > The chance of Paul's Goat Hoof spawning in the world.
-> 
-> > Default: 20
->
-> GoatHoofSpeedIncrease
-> > The amount of speed the Goat Hoof gives.
-> 
-> > Default: 4.6
+![Ukulele](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/ukulele.gif)
 
-> WhiteScrapSpawnWeight
-> > The chance of a white scrap item spawning in the world.
-> 
-> > Default: 40
-> 
-> GreenScrapSpawnWeight
-> > The chance of a green scrap item spawning in the world.
-> 
-> > Default: 30
-> 
-> YellowScrapSpawnWeight
-> > The chance of a yellow scrap item spawning in the world.
-> 
-> > Default: 20
-> 
-> RedScrapSpawnWeight
-> > The chance of a red scrap item spawning in the world.
-> 
-> > Default: 10
+---
 
-> BungusSpawnWeight
-> > The chance of the Bustling Fungus spawning in the world.
-> 
-> > Default: 20
-> 
-> BungusHealthIncrease
-> > The amount of health the Bustling Fungus heals.
-> 
-> > Default: 5
-> 
-> BungusHealInterval
-> > The interval at which the Bustling Fungus heals.
-> 
-> > Default: 1
-> 
-> BungusActivationTime
-> > The time it takes for the Bustling Fungus to activate.
-> 
-> > Default: 1
-> 
-> BungusMode
-> > Renames the Bustling Fungus to Bungus.
-> 
-> > Default: false
+### Will O' The Wisp - Green Item - Scrap Item
+> Explode on death while held.
 
-> RollOfPenniesSpawnWeight
-> > The chance of the Roll Of Pennies spawning in the world.
-> 
-> > Default: 40
-> 
-> RollOfPenniesValueIncrease
-> > The amount of value the Roll Of Pennies gains upon taking damage.
-> 
-> > Default: 10
+---
 
-> UkuleleSpawnWeight
-> > The chance of the Ukulele spawning in the world.
-> 
-> > Default: 30
+### White Scrap - White Item - Scrap Item
+> A scrap of white rarity.
 
-> GooboJrSpawnWeight
-> > The chance of Goobo Jr. spawning in the world.
-> 
-> > Default: 10
+### Green Scrap - Green Item - Scrap Item
+> A scrap of green rarity.
 
-> DiosBestFriendPrice
-> > The price of Dio's Best Friend.
-> 
-> > Default: 1000
+### Yellow Scrap - Yellow Item - Scrap Item
+> A scrap of yellow rarity.
 
+### Red Scrap - Red Item - Scrap Item
+> A scrap of red rarity.
+
+---
+
+### Safer Spaces - Void Item - Shop Item
+> Block the next source of damage. Has a cooldown of 3 seconds, and can only be used up to 5 times before it needs to be charged.
+
+---
 
 ## Credits
 * All models and textures belong to Hopoo Games.

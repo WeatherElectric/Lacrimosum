@@ -9,6 +9,10 @@ internal static class ModAssets
     private static AssetBundle _bundle;
     
     public static GameObject BungusMushroomWardPrefab;
+    public static GameObject SaferSpacesBubblePrefab;
+    public static AudioClip RoR2MenuMusic;
+    public static GameObject LilGuyPrefab;
+    public static Sprite BlueLogo;
 
     public static void Load()
     {
@@ -32,6 +36,18 @@ internal static class ModAssets
     {
         BungusMushroomWardPrefab = _bundle.LoadAsset<GameObject>("Assets/Lacrimosum/Scrap/BungusAssets/MushroomWard.prefab");
         BungusMushroomWardPrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        
+        SaferSpacesBubblePrefab = _bundle.LoadAsset<GameObject>("Assets/Lacrimosum/Shop/SaferSpacesAssets/Bubble.prefab");
+        SaferSpacesBubblePrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        
+        RoR2MenuMusic = _bundle.LoadAsset<AudioClip>("Assets/Lacrimosum/Menu/RiskOfRain2.flac");
+        RoR2MenuMusic.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        
+        BlueLogo = _bundle.LoadAsset<Sprite>("Assets/Lacrimosum/Menu/BlueLogo.png");
+        BlueLogo.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        
+        LilGuyPrefab = _bundle.LoadAsset<GameObject>("Assets/Lacrimosum/Menu/LilGuy.prefab");
+        LilGuyPrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
 
     private const Levels.LevelTypes GooboSpawnMaps = Levels.LevelTypes.RendLevel | Levels.LevelTypes.TitanLevel |
@@ -44,10 +60,6 @@ internal static class ModAssets
     
     private static void LoadScrapItems()
     {
-        var bisonSteak = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/BisonSteak.asset");
-        NetworkPrefabs.RegisterNetworkPrefab(bisonSteak.spawnPrefab);
-        Items.RegisterScrap(bisonSteak, RoR2Plugin.ModConfig.BisonSteakSpawnWeight, Levels.LevelTypes.All);
-        
         var willoWisp = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/WilloWisp.asset");
         NetworkPrefabs.RegisterNetworkPrefab(willoWisp.spawnPrefab);
         Items.RegisterScrap(willoWisp, RoR2Plugin.ModConfig.WilloWispSpawnWeight, Levels.LevelTypes.All);
@@ -92,9 +104,9 @@ internal static class ModAssets
 
     private static void LoadShopItems()
     {
-        var diosBestFriend = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Shop/DiosBestFriend.asset");
-        var diosBestFriendNode = _bundle.LoadAsset<TerminalNode>("Assets/Lacrimosum/Shop/DiosBestFriendNode.asset");
-        NetworkPrefabs.RegisterNetworkPrefab(diosBestFriend.spawnPrefab);
-        Items.RegisterShopItem(diosBestFriend, null!, null!, diosBestFriendNode, RoR2Plugin.ModConfig.DiosBestFriendPrice);
+        var saferSpaces = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Shop/SaferSpaces.asset");
+        var saferSpacesNode = _bundle.LoadAsset<TerminalNode>("Assets/Lacrimosum/Shop/SaferSpacesNode.asset");
+        NetworkPrefabs.RegisterNetworkPrefab(saferSpaces.spawnPrefab);
+        Items.RegisterShopItem(saferSpaces, null!, null!, saferSpacesNode, RoR2Plugin.ModConfig.SaferSpacesPrice);
     }
 }

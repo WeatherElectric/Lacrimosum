@@ -6,6 +6,7 @@ using CSync.Extensions;
 using CSync.Lib;
 using Lacrimosum.Assets;
 using Lacrimosum.ItemScripts;
+using Lacrimosum.Patching;
 
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 
@@ -50,10 +51,12 @@ internal class RoR2Plugin : BaseUnityPlugin
         ModConsole.LogInfo("PlayerEventTracker loaded");
         WeaponEventTracker.Init();
         ModConsole.LogInfo("WeaponEventTracker loaded");
-        BungusHelper.Init();
-        ModConsole.LogInfo("BungusHelper loaded");
         NetworkPrefabsHelper.Init();
         ModConsole.LogInfo("NetworkPrefabsHelper loaded");
+        MenuMusicReplacer.Init();
+        ModConsole.LogInfo("MenuMusicReplacer loaded");
+        MineReplacement.Init();
+        ModConsole.LogInfo("MineReplacement loaded");
     }
 
     private static void NetcodePatcher()
@@ -73,17 +76,25 @@ internal class RoR2Plugin : BaseUnityPlugin
 
 internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
 {
+    private const string GeneralSection = "General";
     private const string ScrapSection = "Scrap";
     private const string ShopSection = "Shop Items";
     
     public LacrimosumConfig(ConfigFile configFile) : base(RoR2Plugin.PluginGuid)
     {
-        BisonSteakSpawnWeight =
-            configFile.BindSyncedEntry(ScrapSection, "BisonSteakSpawnWeight", 10,
-                "The most useless item other than the shitass old war stealth kit!");
-        BisonSteakHealthIncrease =
-            configFile.BindSyncedEntry(ScrapSection, "BisonSteakHealthIncrease", 25,
-                "How much health to increase by. Player's base health is 100, for reference.");
+        #region General
+
+        AlwaysReplaceMenuMusic =
+            configFile.Bind(GeneralSection, "AlwaysReplaceMenuMusic", false,
+                "Always replace the menu music with the ROR2 menu music.");
+        DontOverrideMineCode =
+            configFile.BindSyncedEntry(GeneralSection, "DontOverrideMineCode", false,
+                "Don't override the mine explosion code. Having this enabled will make Safer Spaces unable to save you from mines.");
+
+        #endregion
+        
+        #region Scrap
+        
         WilloWispSpawnWeight =
             configFile.BindSyncedEntry(ScrapSection, "WilloWispSpawnWeight", 20,
                 "Explode enemies on death, except you're the enemy");
@@ -124,7 +135,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
             configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesSpawnWeight", 40,
                 "Increases item value upon taking damage.");
         RollOfPenniesValueIncrease =
-            configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesValueIncrease", 10,
+            configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesValueIncrease", 20,
                 "How much to increase item value by.");
         RollOfPenniesMaxValue =
             configFile.BindSyncedEntry(ScrapSection, "RollOfPenniesMaxValue", 100,
@@ -136,15 +147,25 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
             configFile.BindSyncedEntry(ScrapSection, "GooboJrSpawnWeight", 10,
                 "Spawn a gummy clone of yourself. May not be friendly.");
         
-        DiosBestFriendPrice =
-            configFile.BindSyncedEntry(ShopSection, "DiosBestFriendPrice", 1000,
-                "Cheat death. Consumed on use.");
+        #endregion
+        
+        #region Shop
+        
+        SaferSpacesPrice =
+            configFile.BindSyncedEntry(ShopSection, "SaferSpacesPrice", 800,
+                "Block one incoming hit. Recharges after a short delay.");
+        SaferSpacesCooldown =
+            configFile.BindSyncedEntry(ShopSection, "SaferSpacesCooldown", 3f,
+                "How long to wait before recharging the block.");
+        
+        #endregion
         
         ConfigManager.Register(this);
     }
     
-    [field: SyncedEntryField] public SyncedEntry<int> BisonSteakSpawnWeight { get; set; }
-    [field: SyncedEntryField] public SyncedEntry<int> BisonSteakHealthIncrease { get; set; }
+    public ConfigEntry<bool> AlwaysReplaceMenuMusic { get; set; }
+    public SyncedEntry<bool> DontOverrideMineCode { get; set; }
+    
     [field: SyncedEntryField] public SyncedEntry<int> WilloWispSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> GoatHoofSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<float> GoatHoofSpeedIncrease { get; set; }
@@ -163,5 +184,6 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     [field: SyncedEntryField] public SyncedEntry<int> UkuleleSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> GooboJrSpawnWeight { get; set; }
     
-    [field: SyncedEntryField] public SyncedEntry<int> DiosBestFriendPrice { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> SaferSpacesPrice { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<float> SaferSpacesCooldown { get; set; }
 }
