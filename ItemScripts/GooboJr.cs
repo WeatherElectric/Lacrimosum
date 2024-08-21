@@ -9,6 +9,8 @@ public class GooboJr : ThrowableItemBehaviour
     [Header("Goobo Jr. Settings")]
     [Tooltip("The material to apply to the masked enemy.")]
     public Material gooboJrMaterial;
+    [Tooltip("The sounds to play when a Goobo is spawned.")]
+    public AudioClip[] gooboSpawnSounds;
 
     public override void PlayDropSFX()
     {
@@ -39,6 +41,7 @@ public class GooboJr : ThrowableItemBehaviour
                 skinnedMeshRenderer.material = gooboJrMaterial;
             }
         }
+        AudioSource.PlayClipAtPoint(gooboSpawnSounds[Random.Range(0, gooboSpawnSounds.Length)], transform.position);
         NetworkObject.Despawn();
     }
 }
