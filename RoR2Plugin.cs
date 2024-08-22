@@ -4,8 +4,6 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using CSync.Extensions;
 using CSync.Lib;
-using Lacrimosum.Assets;
-using Lacrimosum.Patching;
 
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 
@@ -18,9 +16,9 @@ internal class RoR2Plugin : BaseUnityPlugin
 {
     private const string PluginName = "Lacrimosum";
 #if DEBUG
-    private const string PluginVersion = "1.0.4-DEBUG";
+    private const string PluginVersion = "1.1.0-DEBUG";
 #else
-    private const string PluginVersion = "1.0.4";
+    private const string PluginVersion = "1.1.0";
 #endif
     internal const string PluginGuid = "fragiledeviations.lacrimosum";
     
@@ -145,6 +143,9 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         GooboJrSpawnWeight =
             configFile.BindSyncedEntry(ScrapSection, "GooboJrSpawnWeight", 10,
                 "Spawn a gummy clone of yourself. May not be friendly.");
+        HappiestMaskSpawnWeight =
+            configFile.BindSyncedEntry(ScrapSection, "HappiestMaskSpawnWeight", 10,
+                "I hate this thing.");
         
         #endregion
         
@@ -162,8 +163,14 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         ConfigManager.Register(this);
     }
     
+    #region General
+    
     public ConfigEntry<bool> AlwaysReplaceMenuMusic { get; set; }
     public SyncedEntry<bool> DontOverrideMineCode { get; set; }
+    
+    #endregion
+    
+    #region Scrap
     
     [field: SyncedEntryField] public SyncedEntry<int> WilloWispSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> GoatHoofSpawnWeight { get; set; }
@@ -182,7 +189,14 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     [field: SyncedEntryField] public SyncedEntry<int> RollOfPenniesMaxValue { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> UkuleleSpawnWeight { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> GooboJrSpawnWeight { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> HappiestMaskSpawnWeight { get; set; }
+    
+    #endregion
+    
+    #region Shop
     
     [field: SyncedEntryField] public SyncedEntry<int> SaferSpacesPrice { get; set; }
     [field: SyncedEntryField] public SyncedEntry<float> SaferSpacesCooldown { get; set; }
+    
+    #endregion
 }

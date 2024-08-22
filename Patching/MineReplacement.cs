@@ -1,6 +1,4 @@
-﻿using Utilities = Lacrimosum.Helpers.Utilities;
-
-namespace Lacrimosum.Patching;
+﻿namespace Lacrimosum.Patching;
 
 internal static class MineReplacement
 {

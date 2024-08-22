@@ -9,6 +9,22 @@ Risk of Rain 2-based items.
 
 ---
 
+## MoreCompany Cosmetics
+
+### Beetle
+> Lil guy!
+
+![Beetle](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/beetle.gif)
+
+---
+
+### Delicate Watch
+> ...well, it's still right twice a day.
+
+![Delicate Watch](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/delicatewatch.png)
+
+---
+
 ## Items
 ### Bustling Fungus - White Item - Scrap Item
 >While standing still, heal for 10 health per second.
@@ -49,6 +65,11 @@ Risk of Rain 2-based items.
 
 ### Will O' The Wisp - Green Item - Scrap Item
 > Explode on death while held.
+
+---
+
+### Happiest Mask - Red Item - Scrap Item
+> Similar to Comedy/Tragedy.
 
 ---
 

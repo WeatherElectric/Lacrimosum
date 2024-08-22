@@ -1,6 +1,4 @@
-﻿using Utilities = Lacrimosum.Helpers.Utilities;
-
-namespace Lacrimosum.ItemScripts;
+﻿namespace Lacrimosum.ItemScripts;
 
 [AddComponentMenu("Lacrimosum/Will-O'-The-Wisp")]
 public class WilloWisp : ItemBehaviour

@@ -1,6 +1,4 @@
-﻿using Lacrimosum.Assets;
-
-namespace Lacrimosum.ItemScripts;
+﻿namespace Lacrimosum.ItemScripts;
 
 [AddComponentMenu("Lacrimosum/Bustling Fungus")]
 public class Bungus : ItemBehaviour

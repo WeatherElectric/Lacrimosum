@@ -57,6 +57,12 @@ internal static class ModAssets
     private const Levels.LevelTypes BungusSpawnMaps = Levels.LevelTypes.Modded | Levels.LevelTypes.AdamanceLevel |
                                                       Levels.LevelTypes.MarchLevel | Levels.LevelTypes.VowLevel |
                                                       Levels.LevelTypes.DineLevel | Levels.LevelTypes.RendLevel;
+
+    private const Levels.LevelTypes HappiestMaskSpawnMaps = Levels.LevelTypes.RendLevel | Levels.LevelTypes.TitanLevel |
+                                                            Levels.LevelTypes.ArtificeLevel |
+                                                            Levels.LevelTypes.DineLevel |
+                                                            Levels.LevelTypes.AssuranceLevel |
+                                                            Levels.LevelTypes.Modded | Levels.LevelTypes.EmbrionLevel;
     
     private static void LoadScrapItems()
     {
@@ -100,6 +106,10 @@ internal static class ModAssets
         var goobojr = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/GooboJr.asset");
         NetworkPrefabs.RegisterNetworkPrefab(goobojr.spawnPrefab);
         Items.RegisterScrap(goobojr, RoR2Plugin.ModConfig.GooboJrSpawnWeight, GooboSpawnMaps);
+        
+        var happiestMask = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/HappiestMask.asset");
+        NetworkPrefabs.RegisterNetworkPrefab(happiestMask.spawnPrefab);
+        Items.RegisterScrap(happiestMask, RoR2Plugin.ModConfig.HappiestMaskSpawnWeight, HappiestMaskSpawnMaps);
     }
 
     private static void LoadShopItems()

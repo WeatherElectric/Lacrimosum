@@ -1,6 +1,4 @@
-﻿using Lacrimosum.Patching;
-
-namespace Lacrimosum.ItemScripts;
+﻿namespace Lacrimosum.ItemScripts;
 
 [AddComponentMenu("Lacrimosum/Goobo Jr.")]
 public class GooboJr : ThrowableItemBehaviour
