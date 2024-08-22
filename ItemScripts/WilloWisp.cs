@@ -6,6 +6,11 @@ namespace Lacrimosum.ItemScripts;
 public class WilloWisp : ItemBehaviour
 {
     public static readonly List<WilloWisp> ActiveWisps = [];
+    
+    [Space(10f)]
+    [Header("Will-O'-The-Wisp Settings")]
+    [Tooltip("The gameobject of the particles.")]
+    public GameObject particles;
 
     public override void GrabItem()
     {
@@ -45,5 +50,17 @@ public class WilloWisp : ItemBehaviour
     {
         base.DiscardItem();
         ActiveWisps.Remove(this);
+    }
+    
+    public override void EquipItem()
+    {
+        base.EquipItem();
+        particles.SetActive(true);
+    }
+
+    public override void PocketItem()
+    {
+        base.PocketItem();
+        particles.SetActive(false);
     }
 }

@@ -79,6 +79,7 @@ internal static class PlayerEventTracker
         saferSpacesBubble.name = "SaferSpacesBubble";
         saferSpacesBubble.SetActive(false);
         saferSpacesBubble.transform.localPosition = new Vector3(0, 1.25f, 0);
+        saferSpacesBubble.transform.SetParent(player.lowerSpine, true);
         RoR2Plugin.ModConsole.LogDebug($"Set up SaferSpacesBubble for {player.playerUsername}!");
     }
 

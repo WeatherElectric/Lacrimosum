@@ -57,10 +57,6 @@ internal static class MenuMusicReplacer
     private static void ReplaceMenuMusic(MenuManager menu)
     {
         menu.menuMusic = ModAssets.RoR2MenuMusic;
-        var music = menu.GetComponent<AudioSource>();
-        music.Stop();
-        music.clip = ModAssets.RoR2MenuMusic;
-        music.Play();
     }
     
     private static void AddLilGuy(MenuManager menu)
