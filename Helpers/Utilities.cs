@@ -20,7 +20,7 @@ public static class Utilities
 
     public static GameObject GetSaferSpacesBubble(this PlayerControllerB player)
     {
-        return player.lowerSpine.Find("SaferSpacesBubble").gameObject;
+        return player.playerGlobalHead.Find("SaferSpacesBubble").gameObject;
     }
     
     public static void CreateExplosion(Vector3 explosionPosition, bool spawnExplosionEffect = false, int damage = 20,
