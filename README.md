@@ -67,7 +67,7 @@ Risk of Rain 2-based items.
 ---
 
 ### Safer Spaces - Void Item - Shop Item
-> Block the next source of damage. Has a cooldown of 3 seconds, and can only be used up to 5 times before it needs to be charged.
+> Block the next source of damage. Has a cooldown of 3 seconds.
 
 ![Safer Spaces](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/saferspaces.gif)
 

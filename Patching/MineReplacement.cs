@@ -19,6 +19,6 @@ internal static class MineReplacement
         }
         
         // Basegame mines just call KillPlayer. This explosion method damages them. I need them to only damage the player so that Safer Spaces works.
-        Utilities.CreateExplosion(explosionPosition, spawnExplosionEffect, 20, killRange, damageRange, physicsForce.RoundToInt());
+        Utilities.CreateExplosion(explosionPosition, spawnExplosionEffect, 100, killRange, damageRange, physicsForce.RoundToInt());
     }
 }
