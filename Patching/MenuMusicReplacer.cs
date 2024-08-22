@@ -19,6 +19,7 @@ internal static class MenuMusicReplacer
         {
             ReplaceMenuMusic(self);
             ChangeMenuColors(self);
+            AddLilGuy(self);
         }
         else
         {
@@ -27,10 +28,9 @@ internal static class MenuMusicReplacer
             {
                 ReplaceMenuMusic(self);
                 ChangeMenuColors(self);
+                AddLilGuy(self);
             }
         }
-        
-        AddLilGuy(self);
         
         orig(self);
     }
