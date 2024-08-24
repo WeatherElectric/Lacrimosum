@@ -16,9 +16,9 @@ internal class RoR2Plugin : BaseUnityPlugin
 {
     private const string PluginName = "Lacrimosum";
 #if DEBUG
-    private const string PluginVersion = "1.2.0-DEBUG";
+    private const string PluginVersion = "1.3.0-DEBUG";
 #else
-    private const string PluginVersion = "1.2.0";
+    private const string PluginVersion = "1.3.0";
 #endif
     internal const string PluginGuid = "fragiledeviations.lacrimosum";
     
@@ -157,6 +157,16 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         SaferSpacesCooldown =
             configFile.BindSyncedEntry(ShopSection, "SaferSpacesCooldown", 3f,
                 "How long to wait before recharging the block.");
+        PowerElixirPrice =
+            configFile.BindSyncedEntry(ShopSection, "PowerElixirPrice", 500,
+                "Heal for a percentage of your health when you reach a certain health threshold.");
+        PowerElixirHealthThreshold =
+            configFile.BindSyncedEntry(ShopSection, "PowerElixirHealthThreshold", 25,
+                "The health threshold to activate the item.");
+        PowerElixirHealPercentage =
+            configFile.BindSyncedEntry(ShopSection, "PowerElixirHealPercentage", 75f,
+                "The percentage of health to heal when activated.");
+        
         
         #endregion
         
@@ -197,6 +207,9 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     
     [field: SyncedEntryField] public SyncedEntry<int> SaferSpacesPrice { get; set; }
     [field: SyncedEntryField] public SyncedEntry<float> SaferSpacesCooldown { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> PowerElixirPrice { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<int> PowerElixirHealthThreshold { get; set; }
+    [field: SyncedEntryField] public SyncedEntry<float> PowerElixirHealPercentage { get; set; }
     
     #endregion
 }

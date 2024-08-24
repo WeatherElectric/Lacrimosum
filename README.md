@@ -115,8 +115,15 @@ Risk of Rain 2-based items.
 
 ### Safer Spaces - Void Item - Shop Item
 > Block the next source of damage. Has a cooldown of 3 seconds.
+> 
+> Costs: 800
 
 ![Safer Spaces](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/saferspaces.gif)
+
+### Power Elixir - White Item - Shop Item
+> Upon falling below 25% of your health, heal for 75%. Item is then consumed.
+> 
+> Costs: 500
 
 ---
 

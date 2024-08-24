@@ -118,5 +118,10 @@ internal static class ModAssets
         var saferSpacesNode = _bundle.LoadAsset<TerminalNode>("Assets/Lacrimosum/Shop/SaferSpacesNode.asset");
         NetworkPrefabs.RegisterNetworkPrefab(saferSpaces.spawnPrefab);
         Items.RegisterShopItem(saferSpaces, null!, null!, saferSpacesNode, RoR2Plugin.ModConfig.SaferSpacesPrice);
+        
+        var powerElixir = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Shop/PowerElixir.asset");
+        var powerElixirNode = _bundle.LoadAsset<TerminalNode>("Assets/Lacrimosum/Shop/PowerElixirNode.asset");
+        NetworkPrefabs.RegisterNetworkPrefab(powerElixir.spawnPrefab);
+        Items.RegisterShopItem(powerElixir, null!, null!, powerElixirNode, RoR2Plugin.ModConfig.PowerElixirPrice);
     }
 }

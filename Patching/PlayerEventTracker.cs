@@ -21,6 +21,8 @@ internal static class PlayerEventTracker
         {
             HandlePennies(self);
             RoR2Plugin.ModConsole.LogDebug($"HandlePennies for {self.playerUsername}");
+            HandlePowerElixir(self, damageNumber);
+            RoR2Plugin.ModConsole.LogDebug($"HandlePowerElixir for {self.playerUsername}");
             orig(self, damageNumber, hasDamageSfx, callRPC, causeOfDeath, deathAnimation, fallDamage, force);
             RoR2Plugin.ModConsole.LogDebug($"Player {self.playerUsername} will take damage because no one is holding a Safer Spaces.");
         }
@@ -38,6 +40,8 @@ internal static class PlayerEventTracker
             {
                 HandlePennies(self);
                 RoR2Plugin.ModConsole.LogDebug($"HandlePennies for {self.playerUsername}");
+                HandlePowerElixir(self, damageNumber);
+                RoR2Plugin.ModConsole.LogDebug($"HandlePowerElixir for {self.playerUsername}");
                 orig(self, damageNumber, hasDamageSfx, callRPC, causeOfDeath, deathAnimation, fallDamage, force);
                 RoR2Plugin.ModConsole.LogDebug($"Player {self.playerUsername} will take damage because their safer spaces is on cooldown or is out of battery.");
             }
@@ -82,6 +86,7 @@ internal static class PlayerEventTracker
 
     private static void HandleWillOWisp(PlayerControllerB player)
     {
+        if (WilloWisp.ActiveWisps.Count == 0) return;
         foreach (var wisp in WilloWisp.ActiveWisps)
         {
             wisp.CheckPlayerDeath(player);
@@ -90,9 +95,19 @@ internal static class PlayerEventTracker
     
     private static void HandlePennies(PlayerControllerB player)
     {
+        if (RollOfPennies.ActivePennies.Count == 0) return;
         foreach (var penny in RollOfPennies.ActivePennies)
         {
             penny.CheckDamagedPlayer(player);
+        }
+    }
+
+    private static void HandlePowerElixir(PlayerControllerB player, int damage)
+    {
+        if (PowerElixir.ActiveElixirs.Count == 0) return;
+        foreach (var elixir in PowerElixir.ActiveElixirs)
+        {
+            elixir.CheckHealth(player, damage);
         }
     }
 }
