@@ -16,9 +16,9 @@ internal class RoR2Plugin : BaseUnityPlugin
 {
     private const string PluginName = "Lacrimosum";
 #if DEBUG
-    private const string PluginVersion = "1.3.0-DEBUG";
+    private const string PluginVersion = "1.3.1-DEBUG";
 #else
-    private const string PluginVersion = "1.3.0";
+    private const string PluginVersion = "1.3.1";
 #endif
     internal const string PluginGuid = "fragiledeviations.lacrimosum";
     
@@ -46,8 +46,6 @@ internal class RoR2Plugin : BaseUnityPlugin
         ModConsole.LogInfo($"Assets loaded for {PluginGuid}");
         PlayerEventTracker.Init();
         ModConsole.LogInfo("PlayerEventTracker loaded");
-        WeaponEventTracker.Init();
-        ModConsole.LogInfo("WeaponEventTracker loaded");
         NetworkPrefabsHelper.Init();
         ModConsole.LogInfo("NetworkPrefabsHelper loaded");
         MenuMusicReplacer.Init();
