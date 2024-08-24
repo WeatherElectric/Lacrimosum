@@ -6,8 +6,8 @@
         <LangVersion>latest</LangVersion>
         <IsPackable>false</IsPackable>
         <Company>FragileDeviations</Company>
-        <AssemblyVersion>1.2.0.0</AssemblyVersion>
-        <FileVersion>1.2.0.0</FileVersion>
+        <AssemblyVersion>1.3.0.0</AssemblyVersion>
+        <FileVersion>1.3.0.0</FileVersion>
         <NeutralLanguage>en-US</NeutralLanguage>
         <PackageId>Lacrimosum</PackageId>
     </PropertyGroup>
