@@ -16,9 +16,9 @@ internal class RoR2Plugin : BaseUnityPlugin
 {
     private const string PluginName = "Lacrimosum";
 #if DEBUG
-    private const string PluginVersion = "1.1.3-DEBUG";
+    private const string PluginVersion = "1.2.0-DEBUG";
 #else
-    private const string PluginVersion = "1.1.3";
+    private const string PluginVersion = "1.2.0";
 #endif
     internal const string PluginGuid = "fragiledeviations.lacrimosum";
     

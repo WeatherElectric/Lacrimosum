@@ -61,4 +61,16 @@ public class WilloWisp : ItemBehaviour
         base.PocketItem();
         particles.SetActive(false);
     }
+
+    public override void OnNetworkDespawn()
+    {
+        ActiveWisps.Remove(this);
+        base.OnNetworkDespawn();
+    }
+    
+    public override void OnDestroy()
+    {
+        ActiveWisps.Remove(this);
+        base.OnDestroy();
+    }
 }

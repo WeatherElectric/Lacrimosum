@@ -90,4 +90,20 @@ public class SaferSpaces : ItemBehaviour
         LastPlayerHeldBy.GetSaferSpacesBubble().SetActive(false);
         CanBlock = false;
     }
+
+    public override void OnNetworkDespawn()
+    {
+        ActiveSpaces.Remove(this);
+        LastPlayerHeldBy.GetSaferSpacesBubble().SetActive(false);
+        CanBlock = false;
+        base.OnNetworkDespawn();
+    }
+
+    public override void OnDestroy()
+    {
+        ActiveSpaces.Remove(this);
+        LastPlayerHeldBy.GetSaferSpacesBubble().SetActive(false);
+        CanBlock = false;
+        base.OnDestroy();
+    }
 }

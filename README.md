@@ -23,6 +23,32 @@ Risk of Rain 2-based items.
 
 ![Delicate Watch](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/delicatewatch.png)
 
+### Monster Tooth
+> Drop a healing orb on kill. 
+
+![Monster Tooth](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/tooth.png)
+
+---
+
+### Red Whip
+> Move fast out of combat. 
+
+![Red Whip](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/redwhip.png)
+
+---
+
+### Personal Shield Generator
+> Gain a recharging shield.
+
+![Personal Shield Generator](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/shield.png)
+
+---
+
+### Lens Maker's Glasses
+> Nerd.
+
+![Lens Maker's Glasses](https://raw.githubusercontent.com/WeatherElectric/Lacrimosum/main/Previews/nerdglasses.png)
+
 ---
 
 ## Items

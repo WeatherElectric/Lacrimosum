@@ -51,4 +51,16 @@ public class RollOfPennies : ItemBehaviour
         base.DiscardItem();
         ActivePennies.Remove(this);
     }
+
+    public override void OnNetworkDespawn()
+    {
+        ActivePennies.Remove(this);
+        base.OnNetworkDespawn();
+    }
+
+    public override void OnDestroy()
+    {
+        ActivePennies.Remove(this);
+        base.OnDestroy();
+    }
 }
