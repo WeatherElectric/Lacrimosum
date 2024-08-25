@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using UnityEngine.Serialization;
+// ReSharper disable Unity.PreferAddressByIdToGraphicsParams
 
 namespace Lacrimosum.ItemScripts;
 
@@ -9,16 +11,16 @@ public class Ukulele : ItemBehaviour
     public int shovelHitForce = 1;
     public bool reelingUp;
     public bool isHoldingButton;
-    private RaycastHit rayHit;
-    private Coroutine reelingUpCoroutine;
-    private RaycastHit[] objectsHitByShovel;
-    private List<RaycastHit> objectsHitByShovelList = new();
+    private RaycastHit _rayHit;
+    private Coroutine _reelingUpCoroutine;
+    private RaycastHit[] _objectsHitByShovel;
+    private List<RaycastHit> _objectsHitByShovelList = [];
     public AudioClip reelUp;
     public AudioClip swing;
-    public AudioClip[] hitSFX;
+    [FormerlySerializedAs("hitSFX")] public AudioClip[] hitSfx;
     public AudioSource shovelAudio;
-    private PlayerControllerB previousPlayerHeldBy;
-    private readonly int shovelMask = 1084754248;
+    private PlayerControllerB _previousPlayerHeldBy;
+    private const int ShovelMask = 1084754248;
 
     [Header("Ukulele Settings")] 
     [Tooltip("The particles to play when the ukulele hits something")]
@@ -32,13 +34,13 @@ public class Ukulele : ItemBehaviour
         if (reelingUp || !buttonDown)
             return;
         reelingUp = true;
-        previousPlayerHeldBy = playerHeldBy;
-        if (reelingUpCoroutine != null)
-            StopCoroutine(reelingUpCoroutine);
-        reelingUpCoroutine = StartCoroutine(reelUpShovel());
+        _previousPlayerHeldBy = playerHeldBy;
+        if (_reelingUpCoroutine != null)
+            StopCoroutine(_reelingUpCoroutine);
+        _reelingUpCoroutine = StartCoroutine(ReelUpShovel());
     }
 
-    private IEnumerator reelUpShovel()
+    private IEnumerator ReelUpShovel()
     {
         var shovel = this;
         shovel.playerHeldBy.activatingItem = true;
@@ -46,26 +48,26 @@ public class Ukulele : ItemBehaviour
         shovel.playerHeldBy.playerBodyAnimator.ResetTrigger("shovelHit");
         shovel.playerHeldBy.playerBodyAnimator.SetBool("reelingUp", true);
         shovel.shovelAudio.PlayOneShot(shovel.reelUp);
-        shovel.ReelUpSFXServerRpc();
+        shovel.ReelUpSfxServerRpc();
         yield return new WaitForSeconds(0.35f);
-        // ISSUE: reference to a compiler-generated method
+        yield return new WaitUntil(() => !shovel.isHoldingButton);
         shovel.SwingShovel(!shovel.isHeld);
         yield return new WaitForSeconds(0.13f);
         yield return new WaitForEndOfFrame();
         shovel.HitShovel(!shovel.isHeld);
         yield return new WaitForSeconds(0.3f);
         shovel.reelingUp = false;
-        shovel.reelingUpCoroutine = null;
+        shovel._reelingUpCoroutine = null;
     }
 
     [ServerRpc]
-    public void ReelUpSFXServerRpc()
+    public void ReelUpSfxServerRpc()
     {
-        ReelUpSFXClientRpc();
+        ReelUpSfxClientRpc();
     }
 
     [ClientRpc]
-    public void ReelUpSFXClientRpc()
+    public void ReelUpSfxClientRpc()
     {
         shovelAudio.PlayOneShot(reelUp);
     }
@@ -79,58 +81,58 @@ public class Ukulele : ItemBehaviour
 
     public void SwingShovel(bool cancel = false)
     {
-        previousPlayerHeldBy.playerBodyAnimator.SetBool("reelingUp", false);
+        _previousPlayerHeldBy.playerBodyAnimator.SetBool("reelingUp", false);
         if (cancel)
             return;
         shovelAudio.PlayOneShot(swing);
-        previousPlayerHeldBy.UpdateSpecialAnimationValue(true, (short)previousPlayerHeldBy.transform.localEulerAngles.y,
+        _previousPlayerHeldBy.UpdateSpecialAnimationValue(true, (short)_previousPlayerHeldBy.transform.localEulerAngles.y,
             0.4f);
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
     public void HitShovel(bool cancel = false)
     {
-        if (previousPlayerHeldBy == null)
+        if (_previousPlayerHeldBy == null)
         {
             Debug.LogError("Previousplayerheldby is null on this client when HitShovel is called.");
         }
         else
         {
-            previousPlayerHeldBy.activatingItem = false;
+            _previousPlayerHeldBy.activatingItem = false;
             var flag1 = false;
             var flag2 = false;
             var flag3 = false;
             var hitSurfaceID = -1;
             if (!cancel)
             {
-                previousPlayerHeldBy.twoHanded = false;
-                this.objectsHitByShovel = Physics.SphereCastAll(
-                    previousPlayerHeldBy.gameplayCamera.transform.position +
-                    previousPlayerHeldBy.gameplayCamera.transform.right * -0.35f, 0.8f,
-                    previousPlayerHeldBy.gameplayCamera.transform.forward, 1.5f, shovelMask,
+                _previousPlayerHeldBy.twoHanded = false;
+                // ReSharper disable once Unity.PreferNonAllocApi
+                this._objectsHitByShovel = Physics.SphereCastAll(
+                    _previousPlayerHeldBy.gameplayCamera.transform.position +
+                    _previousPlayerHeldBy.gameplayCamera.transform.right * -0.35f, 0.8f,
+                    _previousPlayerHeldBy.gameplayCamera.transform.forward, 1.5f, ShovelMask,
                     QueryTriggerInteraction.Collide);
-                objectsHitByShovelList = this.objectsHitByShovel.OrderBy(x => x.distance).ToList();
+                _objectsHitByShovelList = this._objectsHitByShovel.OrderBy(x => x.distance).ToList();
                 var enemyAiList = new List<EnemyAI>();
-                for (var index1 = 0; index1 < objectsHitByShovelList.Count; ++index1)
+                foreach (var t in _objectsHitByShovelList)
                 {
-                    var objectsHitByShovel = objectsHitByShovelList[index1];
+                    var objectsHitByShovel = t;
                     if (objectsHitByShovel.transform.gameObject.layer != 8)
                     {
-                        objectsHitByShovel = objectsHitByShovelList[index1];
+                        objectsHitByShovel = t;
                         if (objectsHitByShovel.transform.gameObject.layer != 11)
                         {
-                            objectsHitByShovel = objectsHitByShovelList[index1];
-                            IHittable component1;
-                            if (objectsHitByShovel.transform.TryGetComponent(out component1))
+                            objectsHitByShovel = t;
+                            if (objectsHitByShovel.transform.TryGetComponent(out IHittable component1))
                             {
-                                objectsHitByShovel = objectsHitByShovelList[index1];
-                                if (!(objectsHitByShovel.transform == previousPlayerHeldBy.transform))
+                                objectsHitByShovel = t;
+                                if (!(objectsHitByShovel.transform == _previousPlayerHeldBy.transform))
                                 {
-                                    objectsHitByShovel = objectsHitByShovelList[index1];
+                                    objectsHitByShovel = t;
                                     if (!(objectsHitByShovel.point == Vector3.zero))
                                     {
-                                        var position = previousPlayerHeldBy.gameplayCamera.transform.position;
-                                        objectsHitByShovel = objectsHitByShovelList[index1];
+                                        var position = _previousPlayerHeldBy.gameplayCamera.transform.position;
+                                        objectsHitByShovel = t;
                                         var point = objectsHitByShovel.point;
                                         RaycastHit raycastHit = default;
                                         ref var local = ref raycastHit;
@@ -141,15 +143,15 @@ public class Ukulele : ItemBehaviour
                                     }
 
                                     flag1 = true;
-                                    var forward = previousPlayerHeldBy.gameplayCamera.transform.forward;
+                                    var forward = _previousPlayerHeldBy.gameplayCamera.transform.forward;
                                     try
                                     {
-                                        objectsHitByShovel = objectsHitByShovelList[index1];
+                                        objectsHitByShovel = t;
                                         var component2 = objectsHitByShovel.transform
                                             .GetComponent<EnemyAICollisionDetect>();
                                         if (component2)
                                         {
-                                            if (!(!component2.mainScript))
+                                            if (component2.mainScript)
                                             {
                                                 if (enemyAiList.Contains(component2.mainScript))
                                                     continue;
@@ -161,7 +163,7 @@ public class Ukulele : ItemBehaviour
                                         }
                                         else
                                         {
-                                            objectsHitByShovel = objectsHitByShovelList[index1];
+                                            objectsHitByShovel = t;
                                             if (objectsHitByShovel.transform.GetComponent<PlayerControllerB>())
                                             {
                                                 if (!flag3)
@@ -171,7 +173,7 @@ public class Ukulele : ItemBehaviour
                                             }
                                         }
 
-                                        var flag4 = component1.Hit(shovelHitForce, forward, previousPlayerHeldBy, true,
+                                        var flag4 = component1.Hit(shovelHitForce, forward, _previousPlayerHeldBy, true,
                                             1);
                                         if (flag4 && component2 != null)
                                             enemyAiList.Add(component2.mainScript);
@@ -184,7 +186,7 @@ public class Ukulele : ItemBehaviour
                                     {
                                         Debug.Log(string.Format(
                                             "Exception caught when hitting object with shovel from player #{0}: {1}",
-                                            previousPlayerHeldBy.playerClientId, ex));
+                                            _previousPlayerHeldBy.playerClientId, ex));
                                     }
                                 }
                             }
@@ -193,25 +195,23 @@ public class Ukulele : ItemBehaviour
                         }
                     }
 
-                    objectsHitByShovel = objectsHitByShovelList[index1];
-                    if (!objectsHitByShovel.collider.isTrigger)
-                    {
-                        flag1 = true;
-                        objectsHitByShovel = objectsHitByShovelList[index1];
-                        var tag = objectsHitByShovel.collider.gameObject.tag;
-                        for (var index2 = 0; index2 < StartOfRound.Instance.footstepSurfaces.Length; ++index2)
-                            if (StartOfRound.Instance.footstepSurfaces[index2].surfaceTag == tag)
-                            {
-                                hitSurfaceID = index2;
-                                break;
-                            }
-                    }
+                    objectsHitByShovel = t;
+                    if (objectsHitByShovel.collider.isTrigger) continue;
+                    flag1 = true;
+                    objectsHitByShovel = t;
+                    var gameObjectTag = objectsHitByShovel.collider.gameObject.tag;
+                    for (var index2 = 0; index2 < StartOfRound.Instance.footstepSurfaces.Length; ++index2)
+                        if (StartOfRound.Instance.footstepSurfaces[index2].surfaceTag == gameObjectTag)
+                        {
+                            hitSurfaceID = index2;
+                            break;
+                        }
                 }
             }
 
             if (!flag1)
                 return;
-            RoundManager.PlayRandomClip(shovelAudio, hitSFX);
+            RoundManager.PlayRandomClip(shovelAudio, hitSfx);
             FindObjectOfType<RoundManager>().PlayAudibleNoise(transform.position, 17f, 0.8f);
             if (!flag2 && hitSurfaceID != -1)
             {
@@ -234,7 +234,7 @@ public class Ukulele : ItemBehaviour
     [ClientRpc]
     public void HitShovelClientRpc(int hitSurfaceID)
     {
-        RoundManager.PlayRandomClip(shovelAudio, hitSFX);
+        RoundManager.PlayRandomClip(shovelAudio, hitSfx);
         if (hitSurfaceID == -1)
             return;
         HitSurfaceWithShovel(hitSurfaceID);

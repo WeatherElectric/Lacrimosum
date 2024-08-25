@@ -40,7 +40,8 @@ internal static class ElevatorMusicReplacer
         }
         else
         {
-            System.Random rnd = new(_terminal.groupCredits);
+            var seed = _terminal.groupCredits * StartOfRound.Instance.connectedPlayersAmount;
+            System.Random rnd = new(seed);
             var replace = rnd.Next(0, 100) <= 2;
             if (!replace) return;
             self.elevatorJingleMusic.clip = ModAssets.ElevatorMusic;

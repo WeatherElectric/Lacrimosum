@@ -16,9 +16,9 @@ internal class RoR2Plugin : BaseUnityPlugin
 {
     private const string PluginName = "Lacrimosum";
 #if DEBUG
-    private const string PluginVersion = "1.4.0-DEBUG";
+    private const string PluginVersion = "1.4.1-DEBUG";
 #else
-    private const string PluginVersion = "1.4.0";
+    private const string PluginVersion = "1.4.1";
 #endif
     internal const string PluginGuid = "fragiledeviations.lacrimosum";
     
@@ -54,6 +54,8 @@ internal class RoR2Plugin : BaseUnityPlugin
         ModConsole.LogInfo("MineReplacement loaded");
         ElevatorMusicReplacer.Init();
         ModConsole.LogInfo("ElevatorMusicReplacer loaded");
+        
+        ModConsole.LogInfo($"Loaded {PluginGuid}!");
     }
 
     private static void NetcodePatcher()

@@ -19,7 +19,11 @@ internal static class ModAssets
 
     public static void Load()
     {
-        if (!LoadBundle("lacrimosum")) return;
+        if (!LoadBundle("lacrimosum"))
+        {
+            RoR2Plugin.ModConsole.LogError("Failed to load bundle! Is the bundle next to the assembly?");
+            return;
+        }
         
         if (RoR2Plugin.ModConfig.EnableShopItems) LoadShopItems();
         LoadScrapItems();
@@ -37,41 +41,30 @@ internal static class ModAssets
 
     private static void LoadStrayAssets()
     {
-        BungusMushroomWardPrefab = _bundle.LoadAsset<GameObject>("Assets/Lacrimosum/Scrap/BungusAssets/MushroomWard.prefab");
-        BungusMushroomWardPrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
-        
-        SaferSpacesBubblePrefab = _bundle.LoadAsset<GameObject>("Assets/Lacrimosum/Shop/SaferSpacesAssets/Bubble.prefab");
-        SaferSpacesBubblePrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
-        
-        RoR2MenuMusic = _bundle.LoadAsset<AudioClip>("Assets/Lacrimosum/Menu/RiskOfRain2.flac");
-        RoR2MenuMusic.hideFlags = HideFlags.DontUnloadUnusedAsset;
-        
-        ElevatorMusic = _bundle.LoadAsset<AudioClip>("Assets/Lacrimosum/Elevator/Coalescence.wav");
-        ElevatorMusic.hideFlags = HideFlags.DontUnloadUnusedAsset;
-        
-        BlueLogo = _bundle.LoadAsset<Sprite>("Assets/Lacrimosum/Menu/BlueLogo.png");
-        BlueLogo.hideFlags = HideFlags.DontUnloadUnusedAsset;
-        
-        LilGuyPrefab = _bundle.LoadAsset<GameObject>("Assets/Lacrimosum/Menu/LilGuy.prefab");
-        LilGuyPrefab.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        BungusMushroomWardPrefab = _bundle.LoadPersistentAsset<GameObject>("Assets/Lacrimosum/Scrap/BungusAssets/MushroomWard.prefab");
+        SaferSpacesBubblePrefab = _bundle.LoadPersistentAsset<GameObject>("Assets/Lacrimosum/Shop/SaferSpacesAssets/Bubble.prefab");
+        RoR2MenuMusic = _bundle.LoadPersistentAsset<AudioClip>("Assets/Lacrimosum/Menu/RiskOfRain2.flac");
+        ElevatorMusic = _bundle.LoadPersistentAsset<AudioClip>("Assets/Lacrimosum/Elevator/Coalescence.wav");
+        BlueLogo = _bundle.LoadPersistentAsset<Sprite>("Assets/Lacrimosum/Menu/BlueLogo.png");
+        LilGuyPrefab = _bundle.LoadPersistentAsset<GameObject>("Assets/Lacrimosum/Menu/LilGuy.prefab");
     }
-
-    private const Levels.LevelTypes GooboSpawnMaps = Levels.LevelTypes.RendLevel | Levels.LevelTypes.TitanLevel |
+    
+    private static void LoadScrapItems()
+    {
+        const Levels.LevelTypes gooboSpawnMaps = Levels.LevelTypes.RendLevel | Levels.LevelTypes.TitanLevel |
                                                      Levels.LevelTypes.ArtificeLevel | Levels.LevelTypes.DineLevel |
                                                      Levels.LevelTypes.AssuranceLevel | Levels.LevelTypes.Modded;
 
-    private const Levels.LevelTypes BungusSpawnMaps = Levels.LevelTypes.Modded | Levels.LevelTypes.AdamanceLevel |
+        const Levels.LevelTypes bungusSpawnMaps = Levels.LevelTypes.Modded | Levels.LevelTypes.AdamanceLevel |
                                                       Levels.LevelTypes.MarchLevel | Levels.LevelTypes.VowLevel |
                                                       Levels.LevelTypes.DineLevel | Levels.LevelTypes.RendLevel;
 
-    private const Levels.LevelTypes HappiestMaskSpawnMaps = Levels.LevelTypes.RendLevel | Levels.LevelTypes.TitanLevel |
+        const Levels.LevelTypes happiestMaskSpawnMaps = Levels.LevelTypes.RendLevel | Levels.LevelTypes.TitanLevel |
                                                             Levels.LevelTypes.ArtificeLevel |
                                                             Levels.LevelTypes.DineLevel |
                                                             Levels.LevelTypes.AssuranceLevel |
                                                             Levels.LevelTypes.Modded | Levels.LevelTypes.EmbrionLevel;
-    
-    private static void LoadScrapItems()
-    {
+        
         var willoWisp = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/WilloWisp.asset");
         NetworkPrefabs.RegisterNetworkPrefab(willoWisp.spawnPrefab);
         Items.RegisterScrap(willoWisp, RoR2Plugin.ModConfig.WilloWispSpawnWeight, Levels.LevelTypes.All);
@@ -99,7 +92,7 @@ internal static class ModAssets
         var bungus = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/Bungus.asset");
         if (RoR2Plugin.ModConfig.BungusMode) bungus.itemName = "Bungus";
         NetworkPrefabs.RegisterNetworkPrefab(bungus.spawnPrefab);
-        Items.RegisterScrap(bungus, RoR2Plugin.ModConfig.BungusSpawnWeight, BungusSpawnMaps);
+        Items.RegisterScrap(bungus, RoR2Plugin.ModConfig.BungusSpawnWeight, bungusSpawnMaps);
         
         var rollOfPennies = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/RollOfPennies.asset");
         NetworkPrefabs.RegisterNetworkPrefab(rollOfPennies.spawnPrefab);
@@ -111,11 +104,11 @@ internal static class ModAssets
         
         var goobojr = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/GooboJr.asset");
         NetworkPrefabs.RegisterNetworkPrefab(goobojr.spawnPrefab);
-        Items.RegisterScrap(goobojr, RoR2Plugin.ModConfig.GooboJrSpawnWeight, GooboSpawnMaps);
+        Items.RegisterScrap(goobojr, RoR2Plugin.ModConfig.GooboJrSpawnWeight, gooboSpawnMaps);
         
         var happiestMask = _bundle.LoadAsset<Item>("Assets/Lacrimosum/Scrap/HappiestMask.asset");
         NetworkPrefabs.RegisterNetworkPrefab(happiestMask.spawnPrefab);
-        Items.RegisterScrap(happiestMask, RoR2Plugin.ModConfig.HappiestMaskSpawnWeight, HappiestMaskSpawnMaps);
+        Items.RegisterScrap(happiestMask, RoR2Plugin.ModConfig.HappiestMaskSpawnWeight, happiestMaskSpawnMaps);
     }
 
     private static void LoadShopItems()

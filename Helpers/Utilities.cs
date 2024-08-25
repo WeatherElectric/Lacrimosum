@@ -20,6 +20,13 @@ public static class Utilities
         return player.transform.Find("MushroomWard").gameObject;
     }
 
+    public static T LoadPersistentAsset<T>(this AssetBundle bundle, string path) where T : Object
+    {
+        var asset = bundle.LoadAsset<T>(path);
+        asset.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        return asset;
+    }
+
     public static GameObject GetSaferSpacesBubble(this PlayerControllerB player)
     {
         return player.playerGlobalHead.Find("SaferSpacesBubble").gameObject;
