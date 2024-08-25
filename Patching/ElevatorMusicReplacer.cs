@@ -11,7 +11,13 @@ internal static class ElevatorMusicReplacer
         RoR2Plugin.ModConsole.LogDebug("ElevatorMusicReplacer: MineshaftElevatorController.OnEnable hooked!");
         On.StartOfRound.ShipLeave += OnShipLeave;
         RoR2Plugin.ModConsole.LogDebug("ElevatorMusicReplacer: StartOfRound.ShipLeave hooked!");
-        _terminal = Object.FindObjectOfType<Terminal>();
+        On.Terminal.Start += OnTerminalStart;
+    }
+    
+    private static void OnTerminalStart(On.Terminal.orig_Start orig, Terminal self)
+    {
+        orig(self);
+        _terminal = self;
     }
     
     private static void OnShipLeave(On.StartOfRound.orig_ShipLeave orig, StartOfRound self)
