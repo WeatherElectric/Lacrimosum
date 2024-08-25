@@ -137,3 +137,12 @@ Risk of Rain 2-based items.
 * Utilities.CreateExplosion taken from LethalThings, which is MIT License.
 * All other code done by me.
 * Safer Spaces bubble shader done by ["Dr. Game"](https://assetstore.unity.com/packages/vfx/shaders/bubble-shader-247693) on the Unity Asset Store.
+
+---
+
+## Contribution
+1. Follow the instructions in the [Unity Assets README](https://github.com/WeatherElectric/LacrimosumAssets/blob/master/README.md)
+2. Download the [NetcodePatcher](https://github.com/EvaisaDev/UnityNetcodePatcher) and place it's files in a folder called "NetcodePatcher" within the solution directory. The executable MUST be in the first folder, it should be like `"$(SolutionDir)\NetcodePatcher\NetcodePatcher.Cli.exe"`
+3. Create a folder in the solution dir called "MMHook" and place all MMHook generated assemblies from Lethal Company into it. These are the only references you have to find yourself, rest is nuget.
+4. Edit "BuildComplete" and change the directory variables to be yours. Just never commit any changes to it.
+5. Easier builds should now be possible. Make changes to the code, build, make changes to the Unity assets, build bundles, then run `BuildComplete.bat` and it'll send the mod's zip to downloads, where you can then import it as local in r2modman and test.
