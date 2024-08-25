@@ -2,7 +2,7 @@
 name: Feature Request
 about: Suggest an idea.
 title: "[SUGGESTION]"
-labels: enhancement
+labels: Suggestion
 assignees: FragileDeviations
 
 ---
