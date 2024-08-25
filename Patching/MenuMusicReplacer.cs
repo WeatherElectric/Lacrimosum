@@ -10,7 +10,7 @@ internal static class MenuMusicReplacer
     public static void Init()
     {
         On.MenuManager.Awake += OnMenuAwake;
-        RoR2Plugin.ModConsole.LogInfo("MenuMusicReplacer: MenuManager.Awake hooked!");
+        RoR2Plugin.ModConsole.LogDebug("MenuMusicReplacer: MenuManager.Awake hooked!");
     }
     
     private static void OnMenuAwake(On.MenuManager.orig_Awake orig, MenuManager self)

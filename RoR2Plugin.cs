@@ -16,9 +16,9 @@ internal class RoR2Plugin : BaseUnityPlugin
 {
     private const string PluginName = "Lacrimosum";
 #if DEBUG
-    private const string PluginVersion = "1.3.1-DEBUG";
+    private const string PluginVersion = "1.4.0-DEBUG";
 #else
-    private const string PluginVersion = "1.3.1";
+    private const string PluginVersion = "1.4.0";
 #endif
     internal const string PluginGuid = "fragiledeviations.lacrimosum";
     
@@ -52,6 +52,8 @@ internal class RoR2Plugin : BaseUnityPlugin
         ModConsole.LogInfo("MenuMusicReplacer loaded");
         MineReplacement.Init();
         ModConsole.LogInfo("MineReplacement loaded");
+        ElevatorMusicReplacer.Init();
+        ModConsole.LogInfo("ElevatorMusicReplacer loaded");
     }
 
     private static void NetcodePatcher()
@@ -81,7 +83,10 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
 
         AlwaysReplaceMenuMusic =
             configFile.Bind(GeneralSection, "AlwaysReplaceMenuMusic", false,
-                "Always replace the menu music with the ROR2 menu music.");
+                "Always replace the menu music with the RoR2 menu music.");
+        AlwaysReplaceElevatorMusic =
+            configFile.BindSyncedEntry(GeneralSection, "AlwaysReplaceElevatorMusic", false,
+                "Always replace the elevator music with the RoR1 final stage theme.");
         DontOverrideMineCode =
             configFile.BindSyncedEntry(GeneralSection, "DontOverrideMineCode", false,
                 "Don't override the mine explosion code. Having this enabled will make Safer Spaces unable to save you from mines.");
@@ -149,6 +154,9 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
         
         #region Shop
         
+        EnableShopItems =
+            configFile.BindSyncedEntry(ShopSection, "EnableShopItems", true,
+                "Enable the shop items.");
         SaferSpacesPrice =
             configFile.BindSyncedEntry(ShopSection, "SaferSpacesPrice", 800,
                 "Block one incoming hit. Recharges after a short delay.");
@@ -174,6 +182,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     #region General
     
     public ConfigEntry<bool> AlwaysReplaceMenuMusic { get; set; }
+    public SyncedEntry<bool> AlwaysReplaceElevatorMusic { get; set; }
     public SyncedEntry<bool> DontOverrideMineCode { get; set; }
     
     #endregion
@@ -203,6 +212,7 @@ internal class LacrimosumConfig : SyncedConfig2<LacrimosumConfig>
     
     #region Shop
     
+    [field: SyncedEntryField] public SyncedEntry<bool> EnableShopItems { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> SaferSpacesPrice { get; set; }
     [field: SyncedEntryField] public SyncedEntry<float> SaferSpacesCooldown { get; set; }
     [field: SyncedEntryField] public SyncedEntry<int> PowerElixirPrice { get; set; }

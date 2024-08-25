@@ -10,7 +10,10 @@ internal static class ModAssets
     
     public static GameObject BungusMushroomWardPrefab;
     public static GameObject SaferSpacesBubblePrefab;
+    
+    public static AudioClip ElevatorMusic;
     public static AudioClip RoR2MenuMusic;
+    
     public static GameObject LilGuyPrefab;
     public static Sprite BlueLogo;
 
@@ -18,8 +21,8 @@ internal static class ModAssets
     {
         if (!LoadBundle("lacrimosum")) return;
         
+        if (RoR2Plugin.ModConfig.EnableShopItems) LoadShopItems();
         LoadScrapItems();
-        LoadShopItems();
         LoadStrayAssets();
     }
 
@@ -42,6 +45,9 @@ internal static class ModAssets
         
         RoR2MenuMusic = _bundle.LoadAsset<AudioClip>("Assets/Lacrimosum/Menu/RiskOfRain2.flac");
         RoR2MenuMusic.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        
+        ElevatorMusic = _bundle.LoadAsset<AudioClip>("Assets/Lacrimosum/Elevator/Coalescence.wav");
+        ElevatorMusic.hideFlags = HideFlags.DontUnloadUnusedAsset;
         
         BlueLogo = _bundle.LoadAsset<Sprite>("Assets/Lacrimosum/Menu/BlueLogo.png");
         BlueLogo.hideFlags = HideFlags.DontUnloadUnusedAsset;
