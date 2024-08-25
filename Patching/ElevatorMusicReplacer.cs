@@ -41,7 +41,7 @@ internal static class ElevatorMusicReplacer
         else
         {
             System.Random rnd = new(_terminal.groupCredits);
-            var replace = rnd.Next(0, 100) < 2;
+            var replace = rnd.Next(0, 100) <= 2;
             if (!replace) return;
             self.elevatorJingleMusic.clip = ModAssets.ElevatorMusic;
             _ranOnce = true;
